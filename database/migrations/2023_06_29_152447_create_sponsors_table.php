@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('apartments_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('email');
-            $table->text('text');
-            $table->boolean('state_message')->default(false);
-            $table->softDeletes();
+            $table->float('price', 5, 2)->unsigned();
+            $table->unsignedTinyInteger('duration');
+            $table->text('description')->nullable(true);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('sponsors');
     }
 };
