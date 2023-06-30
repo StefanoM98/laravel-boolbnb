@@ -5,21 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $apartments = Apartment::all();
-        return view('admin.apartments.index' , compact('apartments'));
+        $user = Auth::user();
+        $apartments = Apartment::where('user_id', $user->id)->get();
+        return view('admin.apartments.index', compact('apartments'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,7 +29,7 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartments = Apartment::all();
-        return view('apartments.create' , compact('apartments'));
+        return view('apartments.create', compact('apartments'));
     }
 
     /**
@@ -43,12 +45,11 @@ class ApartmentController extends Controller
 
         if ($request->has('apartments')) {
             $apartment->apartments()->attach($data['apartments']);
-            
         }
-        return redirect()->route('apartments.index')->with('message',"$apartment->title Il tuo immobile è stato caricato con successo ") ;
+        return redirect()->route('apartments.index')->with('message', "$apartment->title Il tuo immobile è stato caricato con successo ");
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -57,7 +58,7 @@ class ApartmentController extends Controller
     public function show($id)
     {
         $apartment = Apartment::findOrFail($id);
-        return view('apartments.show' , compact('apartment'));
+        return view('apartments.show', compact('apartment'));
     }
 
     /**
@@ -70,10 +71,10 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::all();
         $apartment = Apartment::findOrFail($id);
-        return view('apartments.edit' , compact('apartments'));
+        return view('apartments.edit', compact('apartments'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -87,11 +88,11 @@ class ApartmentController extends Controller
 
         if ($request->has('apartments')) {
             $apartment->apartments()->sync($data['apartments']);
-        }else{
+        } else {
             $apartment->apartments()->detach();
         }
         $apartment->update($data);
-        return redirect()->route('apartments.show' , compact('apartment'));
+        return redirect()->route('apartments.show', compact('apartment'));
     }
 
     /**
@@ -102,9 +103,9 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-      $apartment = Apartment::findOrFail($id);
-      $apartment->apartment()->detach();
-      $apartment->delete();
-      return redirect()->route('apartment.index');
+        $apartment = Apartment::findOrFail($id);
+        $apartment->apartment()->detach();
+        $apartment->delete();
+        return redirect()->route('apartment.index');
     }
 }
