@@ -21,8 +21,6 @@ class ApartmentSponsorSeeder extends Seeder
         $apartments = Apartment::all();
         $sponsors = Sponsor::all();
         
-        // $randSponsor = rand(0, count($sponsors) - 1);
-        // $sponsor = $sponsors[$randSponsor];
         foreach ($apartments as $key => $apartment) {
             $sponsor = $sponsors[$key % count($sponsors)];
             $startDate = now();
