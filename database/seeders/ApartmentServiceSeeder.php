@@ -23,7 +23,7 @@ class ApartmentServiceSeeder extends Seeder
         foreach ($apartments as $apartment) {
             $numServices = rand(1,10);
             $randServices = $services->random($numServices);
-            $apartment->services()->attach($randServices);
+            $apartment->services()->syncWithoutDetaching($randServices);
         }
     }
 }
