@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Apartment extends Model
 {
     use HasFactory;
@@ -38,9 +37,11 @@ class Apartment extends Model
     }
 
     public function sponsor() {
-        return $this->belongsToMany(Sponsor::class, 'apartment_service');
+        return $this->belongsToMany(Sponsor::class, 'apartment_sponsor');
     }
-
+    public function view() {
+        return $this->belongsToMany(View::class);
+    }
 
 
 }
