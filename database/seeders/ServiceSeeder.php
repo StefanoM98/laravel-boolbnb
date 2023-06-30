@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -48,7 +49,7 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-temperature-low ',
             ],
             [
-                'name' => 'Ariacondizionata',
+                'name' => 'Aria condizionata',
                 'icon' => 'fa-solid fa-fan',
             ],
             [
@@ -108,11 +109,13 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-fire'
             ],
             [
-                'name' => 'Acessibilità',
+                'name' => 'Accessibilità',
                 'icon' => 'fa-solid fa-wheelchair-move',
             ],
         ];
 
-        // Creare Model
+        foreach ($services as $service) {
+            Service::create($service);
+        }
     }
 }

@@ -32,19 +32,19 @@ class Apartment extends Model
         return $this->belongsTo(User::class);
     }
     // Creata relazione con tabella service
-    public function service() {
+    public function services() {
         return $this->belongsToMany(Service::class, 'apartment_service');
     }
     // Creata relazione con tabella sponsor
-    public function sponsor() {
+    public function sponsors() {
         return $this->belongsToMany(Sponsor::class, 'apartment_sponsor');
     }
     // Creata relazione con tabella view
-    public function view() {
+    public function views() {
         return $this->belongsToMany(View::class);
     }
       // Creata relazione con tabella message
-    public function message() {
+    public function messages() {
         return $this->belongsToMany(Message::class);
     }
 
