@@ -21,11 +21,13 @@ class ApartmentSponsorSeeder extends Seeder
         $apartments = Apartment::all();
         $sponsors = Sponsor::all();
         
-        $randSponsor = rand(0, count($sponsors) - 1);
-        $sponsor = $sponsors[$randSponsor];
-        $startDate = now();
-        $endDate = now()->addHours($sponsor->duration);
-        foreach ($apartments as $apartment) {
+        // $randSponsor = rand(0, count($sponsors) - 1);
+        // $sponsor = $sponsors[$randSponsor];
+        foreach ($apartments as $key => $apartment) {
+            $sponsor = $sponsors[$key % count($sponsors)];
+            $startDate = now();
+            $endDate = now()->addHours($sponsor->duration);
+
             $apartment->sponsors()->attach($sponsor->id, [
                 'start_date' => $startDate,
                 'end_date' => $endDate,
