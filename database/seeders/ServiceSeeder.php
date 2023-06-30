@@ -49,7 +49,7 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-temperature-low ',
             ],
             [
-                'name' => 'Ariacondizionata',
+                'name' => 'Aria condizionata',
                 'icon' => 'fa-solid fa-fan',
             ],
             [
@@ -109,7 +109,7 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-fire'
             ],
             [
-                'name' => 'Acessibilità',
+                'name' => 'Accessibilità',
                 'icon' => 'fa-solid fa-wheelchair-move',
             ],
         ];
