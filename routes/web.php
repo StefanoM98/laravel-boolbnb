@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ApartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('admin', function () {
+    return view('layouts.admin');
+})->middleware(['auth', 'verified'])->name('admin');
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
-Route::resource('projects', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
 });
 
 

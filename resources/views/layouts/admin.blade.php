@@ -57,8 +57,8 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.dashboard') }}">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                 </a>
                             </li>
@@ -69,13 +69,13 @@
                                     <i class="fa-regular fa-folder-open"></i> Apartments
                                 </a>
                             </li>
-                            
-                            <li class="nav-item">
+
+                            {{-- <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.services.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.services.index') }}">
                                     <i class="fa-solid fa-microchip"></i> Services
                                 </a>
-                            </li>
+                            </li> --}}
 
                             
                         </ul>
