@@ -35,14 +35,18 @@ class Apartment extends Model
     public function service() {
         return $this->belongsToMany(Service::class, 'apartment_service');
     }
-
+    // Creata relazione con tabella sponsor
     public function sponsor() {
         return $this->belongsToMany(Sponsor::class, 'apartment_sponsor');
     }
+    // Creata relazione con tabella view
     public function view() {
         return $this->belongsToMany(View::class);
     }
-
+      // Creata relazione con tabella message
+    public function message() {
+        return $this->belongsToMany(Message::class);
+    }
 
 }
 
