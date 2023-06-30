@@ -18,6 +18,12 @@ class ApartmentServiceSeeder extends Seeder
     {
         // prelevo i dati di tutti gli appartamenti e i servizi esistenti
         $apartments = Apartment::all();
-        $services = Service::all();
+        $services = Service::all()->pluck('id');
+
+        foreach ($apartments as $apartment) {
+            $numServices = rand(1,10);
+            $randServices = $services->random($numServices);
+            $apartment->services()->attach($randServices);
+        }
     }
 }
