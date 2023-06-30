@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('apartments_id')->constrained()->cascadeOnDelete();
             $table->ipAddress('ip_address');
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
