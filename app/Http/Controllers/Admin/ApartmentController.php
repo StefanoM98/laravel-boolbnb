@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -55,10 +57,10 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
-        return view('apartments.show', compact('apartment'));
+        // $apartment = Apartment::findOrFail($slug);
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -67,11 +69,10 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        $apartments = Apartment::all();
-        $apartment = Apartment::findOrFail($id);
-        return view('apartments.edit', compact('apartments'));
+        // $apartments = Apartment::all();
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -81,18 +82,22 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
         $data = $request->all();
-        $apartment = Apartment::findOrFail($id);
+        $data['slug'] = Str::slug($data['name'], '_');
 
-        if ($request->has('apartments')) {
-            $apartment->apartments()->sync($data['apartments']);
-        } else {
-            $apartment->apartments()->detach();
+        if ($request->hasFile('image')) {
+            if ($apartment->image) {
+                Storage::delete($apartment->image);
+            }
+            $path = Storage::disk('public')->put('image', $request->image);
+
+            $data['image'] = $path;
         }
+
         $apartment->update($data);
-        return redirect()->route('apartments.show', compact('apartment'));
+        return redirect()->route('admin.apartments.show', compact('apartment'));
     }
 
     /**
