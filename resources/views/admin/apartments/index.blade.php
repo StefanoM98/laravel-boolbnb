@@ -12,9 +12,8 @@
         <thead class="text-danger">
             <tr>
                 <th scope="col" class="col-2">Name</th>
-                <th scope="col" class="col-2">Square Meters</th>
-                <th scope="col" class="col-5">Rooms</th>
                 <th scope="col" class="col-5">City</th>
+                <th scope="col" class="col-5">Address</th>
                 <th scope="col" class="col-5">Price</th>
             </tr>
         </thead>
@@ -23,19 +22,18 @@
             @foreach ($apartments as $apartment)
                 <tr>
                     <td>{{ $apartment->name }}</td>
-                    <td>{{ $apartment->square_meters }}</td>
-                    <td>{{ $apartment->room_number }}</td>
                     <td>{{ $apartment->city }}</td>
-                    <td>{{ $apartment->price }}</td>
+                    <td>{{ $apartment->address }}</td>
+                    <td>{{ $apartment->price }}€</td>
 
 
 
 
-                    {{-- <td>
-                        <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-success m-2">
+                    <td>
+                        <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success m-2">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <a class="btn btn-warning m-2" href="{{ route('admin.projects.edit', $project->slug) }}">
+                        {{-- <a class="btn btn-warning m-2" href="{{ route('admin.projects.edit', $project->slug) }}">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
 
@@ -47,12 +45,12 @@
                             <button type="submit" class="btn btn-danger btn-delete m-2  " onclick="return confirmDelete()">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-                        </form>
+                        </form> --}}
 
                     </td>
-                     --}}
 
-                    
+
+
                 </tr>
             @endforeach
 
