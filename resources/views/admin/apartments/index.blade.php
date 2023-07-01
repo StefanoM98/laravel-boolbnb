@@ -12,23 +12,19 @@
         <thead class="text-danger">
             <tr>
                 <th scope="col" class="col-2">Name</th>
-                <th scope="col" class="col-5">City</th>
-                <th scope="col" class="col-5">Address</th>
-                <th scope="col" class="col-5">Price</th>
+                <th scope="col" class="col-4">City</th>
+                <th scope="col" class="col-4">Address</th>
+                <th scope="col" class="col-3">Price</th>
             </tr>
         </thead>
 
         <tbody>
             @foreach ($apartments as $apartment)
-                <tr>
+                <tr class="text-capitalize">
                     <td>{{ $apartment->name }}</td>
                     <td>{{ $apartment->city }}</td>
                     <td>{{ $apartment->address }}</td>
                     <td>{{ $apartment->price }}€</td>
-
-
-
-
                     <td>
                         <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success m-2">
                             <i class="fa-solid fa-eye"></i>
