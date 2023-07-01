@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- @include('partials.session_message') --}}
-    <h1 class="text-center mt-2 text-danger">Apartments list</h1>
+    <h1 class="text-center mt-2 text-danger"> My Apartments list</h1>
     {{-- <div class="text-center m-4">
         <a class="btn btn-success text-center" href="{{ route('admin.projects.create') }}">NEW PROJECT</a>
     </div> --}}
@@ -15,6 +15,7 @@
                 <th scope="col" class="col-4">City</th>
                 <th scope="col" class="col-4">Address</th>
                 <th scope="col" class="col-3">Price</th>
+                <th scope="col" class="col-3"></th>
             </tr>
         </thead>
 
@@ -29,11 +30,11 @@
                         <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success m-2">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        {{-- <a class="btn btn-warning m-2" href="{{ route('admin.projects.edit', $project->slug) }}">
+                        <a class="btn btn-warning m-2" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
 
-                        <form class="d-inline-block" action="{{ route('admin.projects.destroy', $project->slug) }}"
+                        {{-- <form class="d-inline-block" action="{{ route('admin.projects.destroy', $project->slug) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')

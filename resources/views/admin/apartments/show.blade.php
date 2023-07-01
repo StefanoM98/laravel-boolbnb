@@ -4,27 +4,24 @@
     <h1>{{ $apartment->name }}</h1>
     <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
     <ul>
-
-
-        <li>Prezzo: {{ $apartment['description'] }}</li>
-        <li>Prezzo: {{ $apartment['price'] }}€ a notte</li>
-        <li>Metri quadri: {{ $apartment['square_meters'] }}</li>
-        <li>Posti letto: {{ $apartment['bad_number'] }}</li>
-        <li>Numero di bagni: {{ $apartment['bathroom_number'] }}</li>
-        <li>Numero di stanze: {{ $apartment['room_number'] }}</li>
-
+        <li>Description: {{ $apartment['description'] }}</li>
+        <li>Price: {{ $apartment['price'] }}€ a notte</li>
+        <li>Square maters: {{ $apartment['square_meters'] }}</li>
+        <li>Bed number: {{ $apartment['bed_number'] }}</li>
+        <li>Bathroom number: {{ $apartment['bathroom_number'] }}</li>
+        <li>Room number: {{ $apartment['room_number'] }}</li>
     </ul>
     @if (!$apartment->visibility)
-        L'annuncio è ancora da pubblicare
+        The announcement is yet to be published
     @else
-        L'annuncio è online
+        The announcement is online
     @endif
     <br>
     @if ($apartment->image)
         <img src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
     @else
-        Purtroppo l'immagine non è presente
+        No image!
     @endif
     <br>
-    <a class="btn btn-primary mt-4" href="{{ route('admin.apartments.index') }}">Torna indietro</a>
+    <a class="btn btn-primary mt-4" href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
 @endsection
