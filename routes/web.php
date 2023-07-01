@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin', function () {
-    return view('layouts.admin');
-})->middleware(['auth', 'verified'])->name('admin');
+
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-
-Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
 });
 
 
