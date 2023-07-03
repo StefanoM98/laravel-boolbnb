@@ -3,9 +3,9 @@
 @section('content')
     {{-- @include('partials.session_message') --}}
     <h1 class="text-center mt-2 text-danger"> My Apartments list</h1>
-    {{-- <div class="text-center m-4">
-        <a class="btn btn-success text-center" href="{{ route('admin.projects.create') }}">NEW PROJECT</a>
-    </div> --}}
+    <div class="text-center m-4">
+        <a class="btn btn-success text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+    </div>
 
 
     <table class="table">

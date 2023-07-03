@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartments = Apartment::all();
-        return view('apartments.create', compact('apartments'));
+        $services = Service::all();
+        return view('admin.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -41,15 +43,26 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request, Apartment $apartment, Service $services)
     {
         $data = $request->all();
-        $apartment = Apartment::create($data);
+        $user = Auth::user();
+        $data['user_id'] = $user->id;
+        $data['slug'] = Str::slug($data['name'], '_');
 
-        if ($request->has('apartments')) {
-            $apartment->apartments()->attach($data['apartments']);
+        
+        if ($request->hasFile('image')) {
+            $path = Storage::disk('public')->put('image', $request->image);
+            
+            $data['image'] = $path;
         }
-        return redirect()->route('apartments.index')->with('message', "$apartment->title Il tuo immobile è stato caricato con successo ");
+        
+        $apartment = Apartment::create($data);
+        
+        if ($request->has('services')) {
+            $apartment->services()->attach($request->services);
+        }
+        return redirect()->route('admin.apartments.index')->with('message', "$apartment->name Il tuo immobile è stato caricato con successo ");
     }
 
     /**
