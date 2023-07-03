@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="jumbotron p-5 mb-4 rounded-3">
-        <div class="container py-5">
+    <div class="jumbotron mb-4 rounded-3">
+        <div class="container">
             <div>
                 <img src="{{ asset('img/bnb.png') }}" alt="">
             </div>
