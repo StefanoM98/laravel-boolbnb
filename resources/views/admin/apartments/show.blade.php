@@ -44,18 +44,18 @@
     <br>
     <a class="btn btn-primary mt-4" href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
     <script>
-            let center = [{{ $apartment->longitude }}, {{ $apartment->latitude }}];
-        
-            const map = tt.map({
-                key: "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ",
-                container: "map",
-                center: center,
-                zoom: 10
-            });
-            map.on('load', () => {
-                new tt.Marker()
-                    .setLngLat(center)
-                    .addTo(map);
-            })
+        let center = [{{ $apartment->longitude }}, {{ $apartment->latitude }}];
+    
+        const map = tt.map({
+            key: "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ",
+            container: "map",
+            center: center,
+            zoom: 10
+        });
+        map.on('load', () => {
+            new tt.Marker()
+                .setLngLat(center)
+                .addTo(map);
+        })
     </script>
 @endsection
