@@ -8,14 +8,14 @@
     </div>
 
     @if ($apartments->count() > 0)
-        <table class="table">
+        <table class="table align-middle">
             <thead class="text-danger">
                 <tr>
-                    <th scope="col" class="col-2">Name</th>
-                    <th scope="col" class="col-4">City</th>
-                    <th scope="col" class="col-4">Address</th>
-                    <th scope="col" class="col-3">Price</th>
-                    <th scope="col" class="col-3"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
 
@@ -26,30 +26,28 @@
                         <td>{{ $apartment->city }}</td>
                         <td>{{ $apartment->address }}</td>
                         <td>{{ $apartment->price }}€</td>
-                        <td>
-                            <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success m-2">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                            <a class="btn btn-warning m-2" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
-
-                            <form class="d-inline-block" action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger btn-delete m-2 ms_btn_cancel" data-title="{{$apartment->name}}">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </form>
+                        <td class="d-flex justify-center align-items-center">
+                            <div>
+                                <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a class="btn btn-warning" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                
+                                <form class="d-inline-block" action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                
+                                    <button type="submit" class="btn btn-danger ms_btn_cancel" data-title="{{$apartment->name}}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
-
-
-
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     @else
