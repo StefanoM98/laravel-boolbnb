@@ -93,7 +93,7 @@
                                     value="{{ $apartment->state }}">
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="latitude">Latitude</label>
                                 <input type="text" class="form-control" id="latitude" name="latitude"
                                     value="{{ $apartment->latitude }}">
@@ -103,7 +103,7 @@
                                 <label for="longitude">Longitude</label>
                                 <input type="text" class="form-control" id="longitude" name="longitude"
                                     value="{{ $apartment->longitude }}">
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label for="price">Price</label>

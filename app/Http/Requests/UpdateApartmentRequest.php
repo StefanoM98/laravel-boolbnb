@@ -34,8 +34,6 @@ class UpdateApartmentRequest extends FormRequest
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
-            'latitude' => 'required|numeric|max:100',
-            'longitude' => 'required|numeric|max:100',
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|max:255',
             'visibility' => 'boolean',

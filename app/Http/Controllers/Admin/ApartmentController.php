@@ -50,7 +50,28 @@ class ApartmentController extends Controller
         $data['user_id'] = $user->id;
         $data['slug'] = Str::slug($data['name'], '_');
 
-        
+        // PRELEVO LE COORDINATE GEOGRAFICHE DALL'INDIRIZZO UTILIZZANDO LA LIBRERIA DI TOMTOM
+        $tomtomApi = "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ";
+        $address = $data['address'].', '.$data['city'].', '.$data['state'];
+
+        $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key=" . $tomtomApi;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        $coord = json_decode($response, true);
+            
+        // Estraggo le coordinate geografiche dal risultato
+        $latitude = $coord['results'][0]['position']['lat'];
+        $longitude = $coord['results'][0]['position']['lon'];
+
+        curl_close($ch);
+        $data['latitude'] = $latitude;
+        $data['longitude'] = $longitude;
+
         if ($request->hasFile('image')) {
             $path = Storage::disk('public')->put('image', $request->image);
             
@@ -109,6 +130,29 @@ class ApartmentController extends Controller
 
             $data['image'] = $path;
         }
+
+        // PRELEVO LE COORDINATE GEOGRAFICHE DALL'INDIRIZZO UTILIZZANDO LA LIBRERIA DI TOMTOM
+        $tomtomApi = "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ";
+        $address = $data['address'].', '.$data['city'].', '.$data['state'];
+
+        $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key=" . $tomtomApi;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        $coord = json_decode($response, true);
+            
+        // Estraggo le coordinate geografiche dal risultato
+        $latitude = $coord['results'][0]['position']['lat'];
+        $longitude = $coord['results'][0]['position']['lon'];
+
+        curl_close($ch);
+        $data['latitude'] = $latitude;
+        $data['longitude'] = $longitude;
+
         $apartment->update($data);
         return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', "L'appartamento".$apartment->name."è stato modificato con successo");
     }

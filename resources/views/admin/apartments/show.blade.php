@@ -44,7 +44,6 @@
     <br>
     <a class="btn btn-primary mt-4" href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
     <script>
-        if ($apartment) {
             let center = [{{ $apartment->longitude }}, {{ $apartment->latitude }}];
         
             const map = tt.map({
@@ -58,6 +57,5 @@
                     .setLngLat(center)
                     .addTo(map);
             })
-        }
     </script>
 @endsection

@@ -83,7 +83,7 @@
                                 <label for="state">State</label>
                                 <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}">
                             </div>
-
+{{-- 
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
                                 <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}">
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label for="longitude">Longitude</label>
                                 <input type="text" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') }}">
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label for="price">Price</label>
