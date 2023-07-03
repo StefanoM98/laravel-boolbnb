@@ -10,6 +10,14 @@
         <li>Bed number: {{ $apartment['bed_number'] }}</li>
         <li>Bathroom number: {{ $apartment['bathroom_number'] }}</li>
         <li>Room number: {{ $apartment['room_number'] }}</li>
+        <li>
+            Servizi: 
+            @forelse ($apartment->services as $service)
+                {{$service->name}}{{ $loop->last ? '.' : ', '}}
+            @empty
+                
+            @endforelse
+        </li>
     </ul>
     @if (!$apartment->visibility)
         The announcement is yet to be published

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -59,7 +60,6 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        // $apartment = Apartment::findOrFail($slug);
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -71,8 +71,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        // $apartments = Apartment::all();
-        return view('admin.apartments.edit', compact('apartment'));
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -82,10 +82,11 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, Apartment $apartment, Service $services)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '_');
+        $apartment->services()->sync($request->services);
 
         if ($request->hasFile('image')) {
             if ($apartment->image) {
@@ -95,9 +96,8 @@ class ApartmentController extends Controller
 
             $data['image'] = $path;
         }
-
         $apartment->update($data);
-        return redirect()->route('admin.apartments.show', compact('apartment'));
+        return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', "L'appartamento".$apartment->name."è stato modificato con successo");
     }
 
     /**

@@ -59,6 +59,22 @@
                                     value="{{ $apartment->room_number }}">
                             </div>
 
+                            <div class="mb-3">
+                                <label>Servizi</label>
+                    
+                                <div class="border rounded p-3">
+                                    @foreach ($services as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                id="services-{{ $item->id }}" @checked(old('services') ? in_array($item->id, old('services', [])) : $apartment->services->contains($item))>
+                                            <label class="form-check-label" for="services-{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" name="address"
