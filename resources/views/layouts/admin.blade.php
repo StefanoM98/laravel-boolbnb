@@ -89,7 +89,7 @@
                 </main>
             </div>
         </div>
-
+        @include('partials.modal_delete')
     </div>
 </body>
 

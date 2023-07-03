@@ -34,16 +34,15 @@
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
 
-                        {{-- <form class="d-inline-block" action="{{ route('admin.projects.destroy', $project->slug) }}"
+                        <form class="d-inline-block" action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger btn-delete m-2  " onclick="return confirmDelete()">
+                            <button type="submit" class="btn btn-danger btn-delete m-2 ms_btn_cancel" data-title="{{$apartment->name}}">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-                        </form> --}}
-
+                        </form>
                     </td>
 
 

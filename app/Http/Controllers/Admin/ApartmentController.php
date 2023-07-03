@@ -119,11 +119,16 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
-        $apartment->apartment()->detach();
+        $apartment->services()->detach();
+
+        if ($apartment->image) {
+            Storage::delete($apartment->image);
+        }
+
         $apartment->delete();
-        return redirect()->route('apartment.index');
+        
+        return redirect()->route('admin.apartments.index');
     }
 }
