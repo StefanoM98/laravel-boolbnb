@@ -64,6 +64,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span id="correct-email" class="invalid-feedback" role="alert">
+                                        <strong>Make sure the email is correct</strong>
+                                    </span>
                                 </div>
                             </div>
 
@@ -136,10 +139,22 @@
                 pwdMatch.classList.add('d-none');
                 pwdMatch1.classList.add('d-none');
             }
-        })
+        });
 
         // Script per vedere se la mail è stata inserita correttamente
-
-
+        const mail = document.getElementById('email');
+        const emailMatch = document.getElementById('correct-email');
+        email.addEventListener('input', function () {
+            let email = mail.value;
+            if (email.includes('@')) {
+                mail.classList.remove('is-invalid');
+                mail.classList.add('is-valid');
+                emailMatch.classList.add('d-none');
+            } else {
+                mail.classList.remove('is-valid');
+                mail.classList.add('is-invalid');
+                emailMatch.classList.add('d-block');
+            }
+        });
     </script>
 @endsection
