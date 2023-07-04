@@ -12,12 +12,10 @@
                             @csrf
 
                             <div class="mb-4 row">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name"
-                                        value="{{ old('name') }}" autocomplete="''" autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autocomplete="" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -28,12 +26,10 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="surname"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
+                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="surname" type="text" class="form-control" name="surname"
-                                        value="{{ old('surname') }}" autofocus>
+                                    <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" autofocus>
 
                                     @error('surname')
                                         <span class="invalid-feedback" role="alert">
@@ -44,12 +40,10 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="date_of_birth"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
+                                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="date_of_birth" type="date" class="form-control" name="date_of_birth"
-                                        value="{{ old('date_of_birth') }}" autofocus>
+                                    <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" autofocus>
 
                                     @error('date_of_birth')
                                         <span class="invalid-feedback" role="alert">
@@ -60,14 +54,11 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}">
-
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+                                        
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -77,29 +68,31 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span id="pwd-match1" class="invalid-feedback" role="alert">
+                                        <strong>Passwords doesn't match</strong>
+                                    </span>
                                 </div>
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation">
+                                    <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation">
                                 </div>
+                                <span id="pwd-match" class="invalid-feedback" role="alert">
+                                    <strong>Passwords doesn't match</strong>
+                                </span>
                             </div>
 
                             <div class="mb-4 row mb-0">
@@ -118,19 +111,35 @@
 
 
     <script>
-        // Ottieni il riferimento al form
-        const form = document.getElementById('register-form');
+        // Script per visualizzare se le password corrispondono
+        const password = document.getElementById('password');
+        const confPassword = document.getElementById('password-confirm');
+        const pwdMatch1 = document.getElementById('pwd-match1');
+        const pwdMatch = document.getElementById('pwd-match');
 
-        // Aggiungi un ascoltatore per l'evento "submit"
-        form.addEventListener('submit', (event) => {
-            // Verifica se i campi email e password sono vuoti
-            if (!form.email.value || !form.password.value) {
-                // Impedisci l'invio del form
-                event.preventDefault();
+        confPassword.addEventListener('input', function () {
+            let pwd = password.value;
+            let confPwd = confPassword.value;
 
-                // Mostra un messaggio di errore
-                alert('I campi email e password sono obbligatori.');
+            if (pwd !== confPwd) {
+                password.classList.remove('is-valid');
+                confPassword.classList.remove('is-valid');
+                password.classList.add('is-invalid');
+                confPassword.classList.add('is-invalid');
+                pwdMatch.classList.add('d-block');
+                pwdMatch1.classList.add('d-block');
+            } else if (pwd === confPwd) {
+                password.classList.remove('is-invalid');
+                confPassword.classList.remove('is-invalid');
+                password.classList.add('is-valid');
+                confPassword.classList.add('is-valid');
+                pwdMatch.classList.add('d-none');
+                pwdMatch1.classList.add('d-none');
             }
-        });
+        })
+
+        // Script per vedere se la mail è stata inserita correttamente
+
+
     </script>
 @endsection
