@@ -52,7 +52,7 @@ class ApartmentController extends Controller
 
         // PRELEVO LE COORDINATE GEOGRAFICHE DALL'INDIRIZZO UTILIZZANDO LA LIBRERIA DI TOMTOM
         $tomtomApi = "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ";
-        $address = $data['address'].', '.$data['city'].', '.$data['state'];
+        $address = $data['address'] . ', ' . $data['city'] . ', ' . $data['state'];
 
         $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key=" . $tomtomApi;
 
@@ -63,7 +63,7 @@ class ApartmentController extends Controller
         $response = curl_exec($ch);
 
         $coord = json_decode($response, true);
-            
+
         // Estraggo le coordinate geografiche dal risultato
         $latitude = $coord['results'][0]['position']['lat'];
         $longitude = $coord['results'][0]['position']['lon'];
@@ -74,12 +74,12 @@ class ApartmentController extends Controller
 
         if ($request->hasFile('image')) {
             $path = Storage::disk('public')->put('image', $request->image);
-            
+
             $data['image'] = $path;
         }
-        
+
         $apartment = Apartment::create($data);
-        
+
         if ($request->has('services')) {
             $apartment->services()->attach($request->services);
         }
@@ -94,6 +94,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $user = Auth::user();
+        $apartments = Apartment::where('user_id', $user->id)->get();
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -105,6 +107,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        if ($apartment->user_id !== auth()->user()->id) {
+            return redirect()->route('admin.apartments.index')
+                ->with('message', 'Non sei autorizzato a modificare questo appartamento.');
+        }
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
@@ -133,7 +139,7 @@ class ApartmentController extends Controller
 
         // PRELEVO LE COORDINATE GEOGRAFICHE DALL'INDIRIZZO UTILIZZANDO LA LIBRERIA DI TOMTOM
         $tomtomApi = "q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ";
-        $address = $data['address'].', '.$data['city'].', '.$data['state'];
+        $address = $data['address'] . ', ' . $data['city'] . ', ' . $data['state'];
 
         $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key=" . $tomtomApi;
 
@@ -144,7 +150,7 @@ class ApartmentController extends Controller
         $response = curl_exec($ch);
 
         $coord = json_decode($response, true);
-            
+
         // Estraggo le coordinate geografiche dal risultato
         $latitude = $coord['results'][0]['position']['lat'];
         $longitude = $coord['results'][0]['position']['lon'];
@@ -154,7 +160,7 @@ class ApartmentController extends Controller
         $data['longitude'] = $longitude;
 
         $apartment->update($data);
-        return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', "L'appartamento".$apartment->name."è stato modificato con successo");
+        return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', "L'appartamento" . $apartment->name . "è stato modificato con successo");
     }
 
     /**
@@ -172,7 +178,7 @@ class ApartmentController extends Controller
         }
 
         $apartment->delete();
-        
+
         return redirect()->route('admin.apartments.index');
     }
 }

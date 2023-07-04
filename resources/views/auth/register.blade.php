@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" id="register-form" action="{{ route('register') }}">
                             @csrf
 
                             <div class="mb-4 row">
@@ -16,9 +16,8 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control" name="name"
+                                        value="{{ old('name') }}" autocomplete="''" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -33,9 +32,8 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="surname" type="text"
-                                        class="form-control @error('surname') is-invalid @enderror" name="surname"
-                                        value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+                                    <input id="surname" type="text" class="form-control" name="surname"
+                                        value="{{ old('surname') }}" autofocus>
 
                                     @error('surname')
                                         <span class="invalid-feedback" role="alert">
@@ -50,10 +48,8 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="date_of_birth" type="date"
-                                        class="form-control @error('date_of_birth') is-invalid @enderror"
-                                        name="date_of_birth" value="{{ old('date_of_birth') }}" required
-                                        autocomplete="date_of_birth" autofocus>
+                                    <input id="date_of_birth" type="date" class="form-control" name="date_of_birth"
+                                        value="{{ old('date_of_birth') }}" autofocus>
 
                                     @error('date_of_birth')
                                         <span class="invalid-feedback" role="alert">
@@ -70,7 +66,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email">
+                                        value="{{ old('email') }}">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -86,8 +82,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                        class="form-control @error('password') is-invalid @enderror" name="password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -99,11 +94,11 @@
 
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                        name="password_confirmation">
                                 </div>
                             </div>
 
@@ -120,4 +115,22 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        // Ottieni il riferimento al form
+        const form = document.getElementById('register-form');
+
+        // Aggiungi un ascoltatore per l'evento "submit"
+        form.addEventListener('submit', (event) => {
+            // Verifica se i campi email e password sono vuoti
+            if (!form.email.value || !form.password.value) {
+                // Impedisci l'invio del form
+                event.preventDefault();
+
+                // Mostra un messaggio di errore
+                alert('I campi email e password sono obbligatori.');
+            }
+        });
+    </script>
 @endsection
