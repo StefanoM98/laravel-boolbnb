@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApartmentRequest;
+use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -122,7 +123,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment, Service $services)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment, Service $services)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '_');
