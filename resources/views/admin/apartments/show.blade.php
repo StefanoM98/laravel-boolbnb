@@ -16,13 +16,13 @@
 
     <ul>
         <li>Description: {{ $apartment['description'] }}</li>
-        <li>Price: {{ $apartment['price'] }}€ a notte</li>
+        <li>Price: {{ $apartment['price'] }}€ per night</li>
         <li>Square maters: {{ $apartment['square_meters'] }}</li>
         <li>Bed number: {{ $apartment['bed_number'] }}</li>
         <li>Bathroom number: {{ $apartment['bathroom_number'] }}</li>
         <li>Room number: {{ $apartment['room_number'] }}</li>
         <li>
-            Servizi:
+            Services:
             @forelse ($apartment->services as $service)
                 {{ $service->name }}{{ $loop->last ? '.' : ', ' }}
             @empty
