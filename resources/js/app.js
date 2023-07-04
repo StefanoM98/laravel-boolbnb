@@ -29,4 +29,4 @@ if (buttons.length > 0) {
             })
         });
     });
-}
+};

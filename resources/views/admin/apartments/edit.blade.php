@@ -78,7 +78,12 @@
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" name="address"
-                                    value="{{ $apartment->address }}">
+                                    value="{{ $apartment->address }}" autocomplete="off">
+                                <div id="hidden_list" class="card position-absolute w-100 radius d-none">
+                                    <ul class="group-list">
+    
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -93,17 +98,17 @@
                                     value="{{ $apartment->state }}">
                             </div>
 
-                            {{-- <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="latitude">Latitude</label>
                                 <input type="text" class="form-control" id="latitude" name="latitude"
                                     value="{{ $apartment->latitude }}">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="longitude">Longitude</label>
                                 <input type="text" class="form-control" id="longitude" name="longitude"
                                     value="{{ $apartment->longitude }}">
-                            </div> --}}
+                            </div>
 
                             <div class="form-group">
                                 <label for="price">Price</label>
@@ -134,4 +139,107 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // VARIABILI
+        const apiKey = 'q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ';
+
+        const search = document.getElementById('address');
+        const menuAutoComplete = document.getElementById('hidden_list');
+        const menuAutoCompleteClass = menuAutoComplete.classList;
+        const ulList = document.querySelector('ul.group-list');
+        const city = document.getElementById('city');
+        const state = document.getElementById('state');
+        const latitude = document.getElementById('latitude');
+        const longitude = document.getElementById('longitude');
+
+        // All'input dell' #address
+        search.addEventListener('input', function() {
+            // se l'input dell'indirizzo non è vuoto
+            if (search.value != '')
+
+                // Faccio chiamata API
+                fetchResults(search.value);
+
+            // Gestisco la lista che si autocompleta
+            addRemoveClass();
+
+        })
+
+        /**
+         * Funzione che crea una lista che si autocompila, a seconda del valore iniziale dell'input #address(se contiene o meno un value)
+         */
+        function addRemoveClass() {
+            console.log(menuAutoCompleteClass);
+            if (search.value == '')
+                menuAutoCompleteClass.add('d-none');
+            else
+                menuAutoCompleteClass.remove('d-none');
+        }
+
+        /**
+         * Funzione che fa una chiamata alle API di TomTomDevelopers, non essendo specificate coordinate e raggio di partenza, la ricerca è globale
+         * 
+         * @param String {inputAddress} Indirizzo da dare come parametro alla funzione
+         */
+        function fetchResults(inputAddress) {
+            fetch(
+                    `https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&countrySet=IT`
+                )
+                .then(response => response.json())
+                .then(data => {
+
+                    // Recupero Array di oggetti 'results', dove sono presenti tutti gli indirizzi che verranno stampati nella lista
+                    console.log(data.results);
+
+                    ulList.innerHTML = '';
+
+                    // Se arriva il risultato
+                    if (data.results != undefined)
+
+                        // Per ogni risultato
+                        data.results.forEach(function(currentValue, index, array) {
+
+                            // Creo un elemento HTML <li> della lista autogenerata
+                            const li = document.createElement('li');
+                            li.append(currentValue.address.freeformAddress);
+
+                            // Cliccando sull'elemento della lista autogenerata
+                            li.addEventListener('click',
+                                () => {
+                                    // Aggiorno campo indirizzo
+                                    search.value = currentValue.address.streetName + ", " + currentValue.address.streetNumber + ", " + currentValue.address.postalCode;
+
+                                    // Faccio scomparire lista indirizzi consigliati
+                                    menuAutoCompleteClass.add('d-none');
+                                    ulList.innerHTML = '';
+
+                                    // Cambio i valori degli input invisibili #latitude e #longitute
+                                    city.value = currentValue.address.localName;
+                                    state.value = currentValue.address.country;
+                                    latitude.value = currentValue.position.lat;
+                                    longitude.value = currentValue.position.lon;
+
+                                    console.log(currentValue.position.lat);
+                                    console.log(currentValue.position.lon);
+                                    console.log(latitude.value, 'lat');
+                                    console.log(longitude.value, 'lon');
+                                }
+                            )
+
+                            // Infine aggiungo alla lista
+                            ulList.appendChild(li);
+                        });
+                });
+        };
+
+        // Verifica se click avviene dentro o fuori dalla lista
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = menuAutoComplete.contains(event.target);
+
+            if (!isClickInsideMenu) {
+                menuAutoCompleteClass.add('d-none');
+            }
+        });
+    </script>
 @endsection
