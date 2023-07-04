@@ -31,6 +31,7 @@ class StoreApartmentRequest extends FormRequest
             'bed_number' => 'required|integer|numeric|min:0',
             'bathroom_number' => 'required|integer|numeric|min:0',
             'room_number' => 'required|integer|numeric|min:0',
+            'services'=>'required',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
