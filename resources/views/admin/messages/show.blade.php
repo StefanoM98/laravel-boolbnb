@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container pt-3">
+        <div class="d-flex flex-row-reverse">
+            <a class="btn btn-primary my-4 " href="{{ route('admin.messages.index') }}">Back to your
+                other messages</a>
+        </div>
         <h4>Message by {{ $message->email }}</h4>
 
         <div class="card">
