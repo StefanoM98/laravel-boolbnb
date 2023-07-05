@@ -4,28 +4,24 @@
     <div class="container">
         <div class="row row-col-4">
             <div class="col-md-8 offset-md-2">
-                <div class="card">
+                <div class="card my-3">
                     <div class="card-header">
                         Create Apartment
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
 
-                        <form action="{{ route('admin.apartments.store') }}" method="POST"
+                        <form id="form-e" action="{{ route('admin.apartments.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group  mb-3">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                                <label for="name">Name*</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
@@ -34,32 +30,52 @@
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="square_meters">Square Meters</label>
-                                <input type="number" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                                <label for="square_meters">Square Meters*</label>
+                                <input type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                                @error('square_meters')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="bed_number">Number of Beds</label>
-                                <input type="number" class="form-control" id="bed_number" name="bed_number" value="{{ old('bed_number') }}">
+                                <label for="bed_number">Number of Beds*</label>
+                                <input type="number" class="form-control @error('bed_number') is-invalid @enderror" id="bed_number" name="bed_number" value="{{ old('bed_number') }}">
+                                @error('bed_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="bathroom_number">Number of Bathrooms</label>
-                                <input type="number" class="form-control" id="bathroom_number" name="bathroom_number" value="{{ old('bathroom_number') }}">
+                                <label for="bathroom_number">Number of Bathrooms*</label>
+                                <input type="number" class="form-control @error('bathroom_number') is-invalid @enderror" id="bathroom_number" name="bathroom_number" value="{{ old('bathroom_number') }}">
+                                @error('bathroom_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="room_number">Number of Rooms</label>
-                                <input type="number" class="form-control" id="room_number" name="room_number" value="{{ old('room_number') }}">
+                                <label for="room_number">Number of Rooms*</label>
+                                <input type="number" class="form-control @error('room_number') is-invalid @enderror" id="room_number" name="room_number" value="{{ old('room_number') }}">
+                                @error('room_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label>Servizi</label>
+                                <label>Services*</label>
                     
                                 <div class="border rounded p-3">
                                     @foreach ($services as $item)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="services[]" value="{{ $item->id }}"
+                                            <input class="form-check-input @error('services') is-invalid @enderror" type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
                                             <label class="form-check-label" for="services-{{ $item->id }}">
                                                 {{ $item->name }}
@@ -67,27 +83,47 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @error('services')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group position-relative mb-3">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" autocomplete="off" placeholder="Street, House Number, Postal Code, City">
+                                <label for="address">Address*</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" autocomplete="off" placeholder="Street, House Number, Postal Code, City">
                                 {{-- creazione lista suggerimento indirizzo --}}
                                 <div id="hidden_list" class="card position-absolute w-100 radius d-none">
                                     <ul class="list-group">
     
                                     </ul>
                                 </div>
+                                @error('address')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="city">City</label>
-                                <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}">
+                                <label for="city">City*</label>
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}">
+                                @error('city')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="state">State</label>
-                                <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}">
+                                <label for="state">State*</label>
+                                <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" value="{{ old('state') }}">
+                                @error('state')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group d-none mb-3">
@@ -106,13 +142,18 @@
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="image">Image</label>
-                                <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+                                <label for="image">Image*</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}">
+                                @error('image')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="visibility">Visibility</label>
-                                <select class="form-control" id="visibility" name="visibility">
+                                <label for="visibility">Visibility*</label>
+                                <select class="form-control @error('visibility') is-invalid @enderror" id="visibility" name="visibility">
                                     <option value="1" @selected(old('visibility'))>
                                         Visible
                                     </option>
@@ -120,6 +161,11 @@
                                         Hidden
                                     </option>
                                 </select>
+                                @error('visibility')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">Create</button>
@@ -131,6 +177,12 @@
     </div>
 
     <script>
+        // const form = document.getElementById('form-e');
+        // console.log(form.checkValidity());
+        // form.addEventListener('submit', function(event) {
+
+        // });
+
         // VARIABILI
         const apiKey = 'q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ';
 
