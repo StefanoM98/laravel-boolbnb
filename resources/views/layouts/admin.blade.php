@@ -53,8 +53,7 @@
             <div class="row h-100 position-sticky">
 
 
-                <nav id="sidebarMenu"
-                    class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse h-100 position-fixed">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse h-100 position-fixed" style="z-index: 999;">
                     <div class="pt-3">
                         <ul class="nav flex-column">
 

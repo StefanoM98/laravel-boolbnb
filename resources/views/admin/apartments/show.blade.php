@@ -13,7 +13,6 @@
         <div id="map" style="width: 100%; height: 300px"></div>
     </div>
 
-
     <ul>
         <li>Description: {{ $apartment['description'] }}</li>
         <li>Price: {{ $apartment['price'] }}€ per night</li>
@@ -34,7 +33,9 @@
             <img class="w-50" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
         </figure>
     @else
-        No image!
+        <figure class="w-50 m-0">
+            <img class="w-50 border" src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
+        </figure>
     @endif
     <br>
     <div class="mb-3">

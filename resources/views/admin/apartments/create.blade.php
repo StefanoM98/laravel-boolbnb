@@ -143,12 +143,15 @@
 
                             <div class="form-group  mb-3">
                                 <label for="image">Image*</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}" max="5242880">
                                 @error('image')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <div class="mt-3">
+                                    <img class="d-none w-25" id="image-preview" src="" alt="">
+                                </div>
                             </div>
 
                             <div class="form-group  mb-3">
@@ -177,13 +180,30 @@
     </div>
 
     <script>
-        // const form = document.getElementById('form-e');
-        // console.log(form.checkValidity());
-        // form.addEventListener('submit', function(event) {
+        // Script per gestire la image-preview
+        const imageInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+        // Se l'elemento è trovato
+        if (imageInput && imagePreview) {
+            // Al change del valore di image input
+            imageInput.addEventListener("change", function () {
+                console.log("image change", this.files[0]);
+                // prelevo il file selzionato
+                const selectedFile = this.files[0];
 
-        // });
+                const reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    //      Metto il file nel src del elemento image-preview
+                    //      Visualizzo l'immagine
+                    console.log("lettura completata", reader.result);
+                    imagePreview.src = reader.result;
+                    imagePreview.classList.remove("d-none");
+                });
 
-        // VARIABILI
+                reader.readAsDataURL(selectedFile);
+            });
+        };
+        
         const apiKey = 'q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ';
 
         const search = document.getElementById('address');
