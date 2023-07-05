@@ -12,7 +12,6 @@
                         <th scope="col">Text</th>
                         <th scope="col">Sent at</th>
                         <th scope="col">Actions</th>
-
                     </tr>
                 </thead>
                 <tbody>
