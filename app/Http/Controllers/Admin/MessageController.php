@@ -36,35 +36,24 @@ class MessageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment, Message $message)
     {
-        //
+        $user = Auth::user();
+        $myApartments = [];
+        $apartments = Apartment::where('user_id', $user->id)->get()->toArray();
+        foreach ($apartments as $apartment) {
+            $myApartments[] = $apartment['id'];
+        }
+        if (in_array($message->apartment_id, $myApartments)) {
+            return view('admin.messages.show', compact('message'));
+        } else {
+            abort(403, 'you are not authorized');
+        }
     }
 
     /**
