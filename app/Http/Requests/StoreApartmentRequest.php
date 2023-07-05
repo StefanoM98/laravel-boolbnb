@@ -36,8 +36,8 @@ class StoreApartmentRequest extends FormRequest
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|max:255',
-            'visibility' => 'boolean',
+            'image' => 'required|max:255',
+            'visibility' => 'required|boolean',
         ];
     }
 
