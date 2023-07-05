@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
     Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('sponsors', SponsorController::class)->only(['index', 'show']);
+    Route::any('payment/clientToken', [PaymentController::class, 'clientToken'])->name('payment.clientToken');
+    Route::get('payment/make', [PaymentController::class, 'make'])->name('payment.make');
 });
 
 
