@@ -10,6 +10,7 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'apartment_id',
         'name',
         'email',
         'text',
@@ -17,7 +18,8 @@ class Message extends Model
     ];
 
     // creata relazione con la tabella apartments
-    public function apartments() {
+    public function apartment()
+    {
         return $this->belongsTo(Apartment::class);
     }
 }

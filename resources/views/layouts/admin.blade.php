@@ -72,12 +72,12 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.services.index' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.services.index') }}">
-                                    <i class="fa-solid fa-microchip"></i> Services
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.messages.index') }}">
+                                    <i class="fa-solid fa-message"></i> Messages
                                 </a>
-                            </li> --}}
+                            </li>
 
 
                         </ul>
