@@ -81,7 +81,7 @@ class ApartmentController extends Controller
 
         $apartment->services()->attach($request->services);
 
-        return redirect()->route('admin.apartments.index')->with('message', "$apartment->name Il tuo immobile è stato caricato con successo ");
+        return redirect()->route('admin.apartments.index')->with('message', "$apartment->name: has been added on the website");
     }
 
     /**
