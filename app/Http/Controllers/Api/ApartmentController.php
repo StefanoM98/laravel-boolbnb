@@ -20,9 +20,17 @@ class ApartmentController extends Controller
             $array_id[] = $value;
         }
 
-        $apartments = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')->select('apartments.*')->with(['sponsors' => function ($query) {
-            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
-        }])->with('services')->where('visibility', '1')->orderBy('updated_at', 'DESC')->paginate(10);
+        $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+            ->select('apartments.*')
+            ->with(['sponsors' => function ($query) {
+                $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
+                    ->orderBy('end_date', 'asc');
+            }])
+            ->with('services')
+            ->where('visibility', '1')
+            ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(40);
 
         // if (request()->input('address')) {
         //     $address = request()->input('address');
@@ -38,14 +46,14 @@ class ApartmentController extends Controller
 
         // $apartments = Apartment::all();
 
-        // foreach ($apartments as $apartment) {
-        //     $apartment->image = $apartment->geImageUri();
-        //     if (in_array($apartment['id'], $array_id)) {
-        //         $apartment['sponsored'] = true;
-        //     } else {
-        //         $apartment['sponsored'] = false;
-        //     }
-        // }
+        foreach ($apartments as $apartment) {
+            $apartment->image = $apartment->getImageUri();
+            if (in_array($apartment['id'], $array_id)) {
+                $apartment['sponsored'] = true;
+            } else {
+                $apartment['sponsored'] = false;
+            }
+        }
 
         return response()->json([
             'success' => true,
