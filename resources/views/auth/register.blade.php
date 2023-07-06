@@ -100,7 +100,7 @@
 
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" id="btn-submit" disabled>
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -119,10 +119,13 @@
         const confPassword = document.getElementById('password-confirm');
         const pwdMatch1 = document.getElementById('pwd-match1');
         const pwdMatch = document.getElementById('pwd-match');
+        // Gestione btn submit enabled/disabled
+        const btn = document.getElementById('btn-submit');
 
         confPassword.addEventListener('input', function () {
             let pwd = password.value;
             let confPwd = confPassword.value;
+            console.log(pwd.length >= 8, confPwd.length >= 8);
 
             if (pwd !== confPwd) {
                 password.classList.remove('is-valid');
@@ -131,22 +134,24 @@
                 confPassword.classList.add('is-invalid');
                 pwdMatch.classList.add('d-block');
                 pwdMatch1.classList.add('d-block');
-            } else if (pwd === confPwd) {
+                btn.disabled = true;
+            } else if (pwd === confPwd && pwd.length >= 8 && confPwd.length >= 8) {
                 password.classList.remove('is-invalid');
                 confPassword.classList.remove('is-invalid');
                 password.classList.add('is-valid');
                 confPassword.classList.add('is-valid');
                 pwdMatch.classList.add('d-none');
                 pwdMatch1.classList.add('d-none');
+                btn.disabled = false;
             }
         });
 
         // Script per vedere se la mail è stata inserita correttamente
         const mail = document.getElementById('email');
         const emailMatch = document.getElementById('correct-email');
-        email.addEventListener('input', function () {
-            let email = mail.value;
-            if (email.includes('@')) {
+        mail.addEventListener('input', function () {
+            let my_email = mail.value;
+            if (my_email.includes('@')) {
                 mail.classList.remove('is-invalid');
                 mail.classList.add('is-valid');
                 emailMatch.classList.add('d-none');
@@ -156,5 +161,6 @@
                 emailMatch.classList.add('d-block');
             }
         });
+
     </script>
 @endsection
