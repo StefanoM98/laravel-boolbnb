@@ -161,6 +161,5 @@
                 emailMatch.classList.add('d-block');
             }
         });
-
     </script>
 @endsection
