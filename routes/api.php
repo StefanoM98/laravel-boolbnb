@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Apartment Api Controller
-Route::apiResource('apartments', ApartmentController::class);
+Route::apiResource('apartments', ApartmentController::class)->only('index', 'show');
 
 // Sponsored Apartments Api Controller
 Route::get('sponsored-apartments', [ApartmentController::class, 'sponsoredApartments'])->name('sponsored-apartments');
 
 // Service Controller
-Route::apiResource('services', ServiceController::class);
+Route::apiResource('services', ServiceController::class)->only('index');
 
 // Login Controller
 Route::get('/login', [LoginController::class, 'login'])->name('api.login');

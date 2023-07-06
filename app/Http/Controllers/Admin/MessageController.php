@@ -45,6 +45,10 @@ class MessageController extends Controller
     {
         $user = Auth::user();
         // gestire notifiche dei messaggi non visualizzati
+        if (!$message->state_message) {
+            $message['state_message'] = true;
+            $message->save();
+        }
         
         $myApartments = [];
         $apartments = Apartment::where('user_id', $user->id)->get()->toArray();

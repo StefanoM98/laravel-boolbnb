@@ -57,6 +57,10 @@ class Apartment extends Model
     {
         $img404 = 'Image_not_available.png';
         $imgPath = public_path('img/' . $img404);
-        return $this->image ? url('storage/' . $this->image) : $imgPath;
+        if ($this->image && file_exists(public_path('storage/' . $this->image))) {
+            return url('storage/' . $this->image);
+        } else {
+            return $imgPath;
+        }
     }
 }
