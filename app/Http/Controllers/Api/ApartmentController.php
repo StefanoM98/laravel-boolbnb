@@ -85,7 +85,8 @@ class ApartmentController extends Controller
     public function sponsoredApartments()
     {
         $apartments = Apartment::whereHas('sponsors', function ($query) {
-            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
+            ->orderBy('end_date', 'asc');
         })->paginate(20);
 
         foreach ($apartments as $apartment) {

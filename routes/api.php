@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Apartment Api Controller
 Route::apiResource('apartments', ApartmentController::class);
+
+// Apartment Api Controller
+Route::get('sponsored-apartments', [ApartmentController::class, 'sponsoredApartments'])->name('sponsored-apartments');
