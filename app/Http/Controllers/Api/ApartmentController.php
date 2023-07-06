@@ -11,19 +11,18 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        // $sponsored_apartment_id = Apartment::whereHas('sponsors', function ($query) {
-        //     $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
-        // })->pluck('id');
+        $sponsored_apartment_id = Apartment::whereHas('sponsors', function ($query) {
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
+        })->pluck('id');
 
-        // $array_id = [];
-        // foreach ($sponsored_apartment_id as $value) {
-        //     $array_id[] = $value;
-        // }
+        $array_id = [];
+        foreach ($sponsored_apartment_id as $value) {
+            $array_id[] = $value;
+        }
 
-        $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')->select('apartments.*')->get();
-        // ->with(['sponsors' => function ($query) {
-        //     $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
-        // }])->with('services')->where('visibility', '1')->orderBy('update_at', 'DESC');
+        $apartments = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')->select('apartments.*')->with(['sponsors' => function ($query) {
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
+        }])->with('services')->where('visibility', '1')->orderBy('updated_at', 'DESC')->paginate(10);
 
         // if (request()->input('address')) {
         //     $address = request()->input('address');
