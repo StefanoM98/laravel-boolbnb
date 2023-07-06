@@ -82,13 +82,22 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function apartmentSponsor()
+    public function sponsoredApartments()
     {
         $apartments = Apartment::whereHas('sponsors', function ($query) {
             $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
         })->paginate(20);
 
         foreach ($apartments as $apartment) {
+            $apartment->image = $apartment->getImageUri();
+            // Aggiungo chiave sponsored così da poter ordinare per appartamenti sponsorizzati
+            $apartment['sponsored'] = true;
         }
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'message' => 'List of sponsored apartments',
+            'apartments' => $apartments,
+        ]);
     }
 }
