@@ -21,6 +21,7 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+    @yield('head')
 </head>
 
 <body>
@@ -92,6 +93,7 @@
         </div>
         @include('partials.modal_delete')
     </div>
+    @yield('scripts')
 </body>
 
 </html>

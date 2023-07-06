@@ -4,10 +4,12 @@
 
 @section('head')
     {{-- BRAINTREE --}}
-    <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
+    {{-- <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script> --}}
+    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
 
     {{-- JQUERY --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -26,9 +28,8 @@
         </div>
         {{-- div fornito da Braintree per il layout --}}
         <div>
-            @csrf
             <div id="dropin-container"></div>
-            <button id="submit-button" class="button button--small button--green">Acquista</button>
+            <button id="submit-button" class="btn btn-primary">Acquista</button>
         </div>
 
         <div class="d-flex justify-content-end">
@@ -64,11 +65,15 @@
             instance = dropinInstance;
             button.addEventListener('click', function() {
                 instance.requestPaymentMethod(function(err, payload) {
-                    // API alla funzione make del PaymentController passando i parametri payload, sponsor e apartment
-                    $.get('{{ route('admin.payment.make') }}', {
+                    console.log($.get('{{ route('admin.payment.process') }}', {
                         payload,
-                        sponsor,
-                        apartment,
+                        // sponsor,
+                        // apartment,
+                    }));// API alla funzione make del PaymentController passando i parametri payload, sponsor e apartment
+                    $.get('{{ route('admin.payment.process') }}', {
+                        payload,
+                        // sponsor,
+                        // apartment,
                     }, function(response) {
                         if (response.success) {
                             // messaggio di successo

@@ -23,7 +23,6 @@ class PaymentController extends Controller
 
             // Identifico l'user autenticato
             $user = Auth::user();
-
             // Recupero quello specifico appartamento
             $apartment = $user->apartments->where('id', $apartment_id);
 
@@ -42,7 +41,6 @@ class PaymentController extends Controller
 
             // Generi il token
             $clientToken = $gateway->clientToken()->generate();
-
             // Ritorni la vista passando il token
             return view('admin.payment.index', ['token' => $clientToken]);
 
@@ -53,7 +51,7 @@ class PaymentController extends Controller
     }
 
     // Funzione che gestisce il pagamento
-    public function make(Request $request)
+    public function process(Request $request)
     {
 
         // Creo variabile payload e nonce
