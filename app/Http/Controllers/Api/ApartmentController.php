@@ -85,11 +85,11 @@ class ApartmentController extends Controller
     public function sponsoredApartments()
     {
         $apartments = Apartment::whereHas('sponsors', function ($query) {
-            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
+            ->orderBy('end_date', 'DESC');
         })->paginate(20);
 
         foreach ($apartments as $apartment) {
-            $apartment->image = $apartment->getImageUri();
             // Aggiungo chiave sponsored così da poter ordinare per appartamenti sponsorizzati
             $apartment['sponsored'] = true;
         }

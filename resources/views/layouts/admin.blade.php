@@ -72,9 +72,20 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
+                                <a class="nav-link text-white position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.messages.index') }}">
                                     <i class="fa-solid fa-message"></i> Messages
+                                    @php
+                                        if ($messages) {
+                                            $count = $messages->where('state_message', false)->count();
+                                        }
+                                    @endphp
+                                    @if ($count)
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{$count}}
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    @endif
                                 </a>
                             </li>
 
