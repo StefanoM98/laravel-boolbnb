@@ -26,7 +26,6 @@ class UpdateApartmentRequest extends FormRequest
     {
         return [
             'name' => ['required','string','max:100', Rule::unique('apartments')->ignore($this->apartment)],
-            'description' => 'required|string',
             'square_meters' => 'required|integer|numeric|min:0',
             'bed_number' => 'required|integer|numeric|min:0',
             'bathroom_number' => 'required|integer|numeric|min:0',
@@ -35,7 +34,7 @@ class UpdateApartmentRequest extends FormRequest
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|max:5242880',
+            'image' => 'max:5242880',
             'visibility' => 'required|boolean',
         ];
     }
