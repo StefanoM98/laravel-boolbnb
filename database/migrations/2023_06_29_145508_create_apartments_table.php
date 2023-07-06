@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name', 100);
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedSmallInteger('square_meters');
             $table->unsignedTinyInteger('bed_number');
             $table->unsignedTinyInteger('bathroom_number');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('latitude', 100);
             $table->string('longitude', 100);
-            $table->float('price', 6, 2)->unsigned();
+            $table->float('price', 6, 2)->unsigned()->nullable();
             $table->string('image', 255)->nullable();
             $table->boolean('visibility')->default(1);
             $table->timestamps();

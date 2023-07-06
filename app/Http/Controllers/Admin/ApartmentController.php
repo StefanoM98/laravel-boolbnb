@@ -65,13 +65,10 @@ class ApartmentController extends Controller
 
         $coord = json_decode($response, true);
 
-        // Estraggo le coordinate geografiche dal risultato
-        $latitude = $coord['results'][0]['position']['lat'];
-        $longitude = $coord['results'][0]['position']['lon'];
 
         curl_close($ch);
-        $data['latitude'] = $latitude;
-        $data['longitude'] = $longitude;
+        $data['latitude'] = $request->latitude;
+        $data['longitude'] = $request->longitude;
 
         if ($request->hasFile('image')) {
             $path = Storage::disk('public')->put('image', $request->image);

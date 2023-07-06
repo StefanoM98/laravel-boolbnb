@@ -26,7 +26,6 @@ class StoreApartmentRequest extends FormRequest
     {
         return [
             'name' => ['required','string','max:100', Rule::unique('apartments')],
-            'description' => 'required|string',
             'square_meters' => 'required|integer|numeric|min:0',
             'bed_number' => 'required|integer|numeric|min:0',
             'bathroom_number' => 'required|integer|numeric|min:0',
@@ -35,7 +34,7 @@ class StoreApartmentRequest extends FormRequest
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
+            'price' => 'numeric|min:0',
             'image' => 'required|max:5242880',
             'visibility' => 'required|boolean',
         ];
