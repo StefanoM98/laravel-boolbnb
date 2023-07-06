@@ -260,32 +260,34 @@
                             
                         // Creo un elemento HTML <li> della lista autogenerata
                         const li = document.createElement('li');
-                        li.classList.add('list-group-item');
-                        li.append(currentValue.address.freeformAddress);
-                        
-                        // Cliccando sull'elemento della lista autogenerata
-                        li.addEventListener('click',
-                        () => {
-                            // Aggiorno campo indirizzo
-                            if (currentValue.address.streetNumber) {
-                                search.value = currentValue.address.streetName + ", " + currentValue.address.streetNumber +  ", " + currentValue.address.postalCode;
-                            } else {
-                                search.value = currentValue.address.streetName + ", " + currentValue.address.postalCode;
-                            }
+                        if (search.value.length > 4) {
+                            li.classList.add('list-group-item');
+                            li.append(currentValue.address.freeformAddress);
+                            // Cliccando sull'elemento della lista autogenerata
+                            li.addEventListener('click',
+                            () => {
+                                // Aggiorno campo indirizzo
+                                if (currentValue.address.streetNumber) {
+                                    search.value = currentValue.address.streetName + ", " + currentValue.address.streetNumber +  ", " + currentValue.address.postalCode;
+                                } else {
+                                    search.value = currentValue.address.streetName + ", " + currentValue.address.postalCode;
+                                }
+                                
+                                // Faccio scomparire lista indirizzi consigliati
+                                menuAutoCompleteClass.add('d-none');
+                                ulList.innerHTML = '';
+                                
+                                // Cambio i valori degli input invisibili #latitude e #longitute
+                                city.value = currentValue.address.localName;
+                                state.value = currentValue.address.country;
+                                latitude.value = currentValue.position.lat;
+                                longitude.value = currentValue.position.lon;
+                            })
                             
-                            // Faccio scomparire lista indirizzi consigliati
-                            menuAutoCompleteClass.add('d-none');
-                            ulList.innerHTML = '';
-                            
-                            // Cambio i valori degli input invisibili #latitude e #longitute
-                            city.value = currentValue.address.localName;
-                            state.value = currentValue.address.country;
-                            latitude.value = currentValue.position.lat;
-                            longitude.value = currentValue.position.lon;
-                        })
+                            // Infine aggiungo alla lista
+                            ulList.appendChild(li);
+                        }
                         
-                        // Infine aggiungo alla lista
-                        ulList.appendChild(li);
                     });
                 };
             });
