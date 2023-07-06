@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 class Apartment extends Model
 {
     use HasFactory;
@@ -12,7 +13,6 @@ class Apartment extends Model
         'user_id',
         'name',
         'slug',
-        'description',
         'square_meters',
         'bed_number',
         'bathroom_number',
@@ -28,25 +28,28 @@ class Apartment extends Model
     ];
 
     // Creata relazione con tabella user
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
     // Creata relazione con tabella service
-    public function services() {
+    public function services()
+    {
         return $this->belongsToMany(Service::class, 'apartment_service');
     }
     // Creata relazione con tabella sponsor
-    public function sponsors() {
+    public function sponsors()
+    {
         return $this->belongsToMany(Sponsor::class, 'apartment_sponsor');
     }
     // Creata relazione con tabella view
-    public function views() {
+    public function views()
+    {
         return $this->belongsToMany(View::class);
     }
-      // Creata relazione con tabella message
-    public function messages() {
+    // Creata relazione con tabella message
+    public function messages()
+    {
         return $this->belongsToMany(Message::class);
     }
-
 }
-

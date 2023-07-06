@@ -16,7 +16,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="name">Name*</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -31,7 +32,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="square_meters">Square Meters*</label>
-                                <input type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                                <input type="number" class="form-control @error('square_meters') is-invalid @enderror"
+                                    id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
                                 @error('square_meters')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,7 +43,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="bed_number">Number of Beds*</label>
-                                <input type="number" class="form-control @error('bed_number') is-invalid @enderror" id="bed_number" name="bed_number" value="{{ old('bed_number') }}">
+                                <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
+                                    id="bed_number" name="bed_number" value="{{ old('bed_number') }}">
                                 @error('bed_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -51,7 +54,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="bathroom_number">Number of Bathrooms*</label>
-                                <input type="number" class="form-control @error('bathroom_number') is-invalid @enderror" id="bathroom_number" name="bathroom_number" value="{{ old('bathroom_number') }}">
+                                <input type="number" class="form-control @error('bathroom_number') is-invalid @enderror"
+                                    id="bathroom_number" name="bathroom_number" value="{{ old('bathroom_number') }}">
                                 @error('bathroom_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +65,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="room_number">Number of Rooms*</label>
-                                <input type="number" class="form-control @error('room_number') is-invalid @enderror" id="room_number" name="room_number" value="{{ old('room_number') }}">
+                                <input type="number" class="form-control @error('room_number') is-invalid @enderror"
+                                    id="room_number" name="room_number" value="{{ old('room_number') }}">
                                 @error('room_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -71,11 +76,12 @@
 
                             <div class="mb-3">
                                 <label>Services*</label>
-                    
+
                                 <div class="border rounded p-3">
                                     @foreach ($services as $item)
                                         <div class="form-check">
-                                            <input class="form-check-input @error('services') is-invalid @enderror" type="checkbox" name="services[]" value="{{ $item->id }}"
+                                            <input class="form-check-input @error('services') is-invalid @enderror"
+                                                type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
                                             <label class="form-check-label" for="services-{{ $item->id }}">
                                                 {{ $item->name }}
@@ -92,11 +98,13 @@
 
                             <div class="form-group position-relative mb-3">
                                 <label for="address">Address*</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" autocomplete="off" placeholder="Street, House Number, Postal Code, City">
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    id="address" name="address" value="{{ old('address') }}" autocomplete="off"
+                                    placeholder="Street, House Number, Postal Code, City">
                                 {{-- creazione lista suggerimento indirizzo --}}
                                 <div id="hidden_list" class="card position-absolute w-100 radius d-none">
                                     <ul class="list-group">
-    
+
                                     </ul>
                                 </div>
                                 @error('address')
@@ -108,7 +116,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="city">City*</label>
-                                <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}">
+                                <input type="text" class="form-control @error('city') is-invalid @enderror"
+                                    id="city" name="city" value="{{ old('city') }}">
                                 @error('city')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -118,7 +127,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="state">State*</label>
-                                <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" value="{{ old('state') }}">
+                                <input type="text" class="form-control @error('state') is-invalid @enderror"
+                                    id="state" name="state" value="{{ old('state') }}">
                                 @error('state')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -128,22 +138,31 @@
 
                             <div class="form-group d-none mb-3">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}">
+                                <input type="text" class="form-control" id="latitude" name="latitude"
+                                    value="{{ old('latitude') }}">
                             </div>
 
                             <div class="form-group d-none mb-3">
                                 <label for="longitude">Longitude</label>
-                                <input type="text" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') }}">
+                                <input type="text" class="form-control" id="longitude" name="longitude"
+                                    value="{{ old('longitude') }}">
                             </div>
 
                             <div class="form-group  mb-3">
-                                <label for="price">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}">
+                                <label for="price">Price*</label>
+                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                    id="price" name="price" value="{{ old('price') }}">
+                                @error('price')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group  mb-3">
                                 <label for="image">Image*</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}" max="5242880">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image" value="{{ old('image') }}" max="5242880">
                                 @error('image')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -156,7 +175,8 @@
 
                             <div class="form-group  mb-3">
                                 <label for="visibility">Visibility*</label>
-                                <select class="form-control @error('visibility') is-invalid @enderror" id="visibility" name="visibility">
+                                <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
+                                    name="visibility">
                                     <option value="1" @selected(old('visibility'))>
                                         Visible
                                     </option>
@@ -186,13 +206,13 @@
         // Se l'elemento è trovato
         if (imageInput && imagePreview) {
             // Al change del valore di image input
-            imageInput.addEventListener("change", function () {
+            imageInput.addEventListener("change", function() {
                 console.log("image change", this.files[0]);
                 // prelevo il file selzionato
                 const selectedFile = this.files[0];
 
                 const reader = new FileReader();
-                reader.addEventListener("load", function () {
+                reader.addEventListener("load", function() {
                     //      Metto il file nel src del elemento image-preview
                     //      Visualizzo l'immagine
                     console.log("lettura completata", reader.result);
@@ -203,7 +223,7 @@
                 reader.readAsDataURL(selectedFile);
             });
         };
-        
+
         const apiKey = 'q6xk75W68NwnmO3Kj5A9ZdBIBFmcbPBJ';
 
         const search = document.getElementById('address');
@@ -244,8 +264,9 @@
          * @param String {inputAddress} Indirizzo da dare come parametro alla funzione
          */
         function fetchResults(inputAddress) {
-            
-            fetch(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&countrySet=IT`).then(response => response.json()).then(data => {
+
+            fetch(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&countrySet=IT`).then(
+                response => response.json()).then(data => {
 
                 // Recupero Array di oggetti 'results', dove sono presenti tutti gli indirizzi che verranno stampati nella lista
 
@@ -254,10 +275,10 @@
                 // Se arriva il risultato
                 if (data.results != undefined) {
 
-                    
+
                     // Per ogni risultato
                     data.results.forEach(function(currentValue, index, array) {
-                            
+
                         // Creo un elemento HTML <li> della lista autogenerata
                         const li = document.createElement('li');
                         if (search.value.length > 4) {
@@ -265,29 +286,32 @@
                             li.append(currentValue.address.freeformAddress);
                             // Cliccando sull'elemento della lista autogenerata
                             li.addEventListener('click',
-                            () => {
-                                // Aggiorno campo indirizzo
-                                if (currentValue.address.streetNumber) {
-                                    search.value = currentValue.address.streetName + ", " + currentValue.address.streetNumber +  ", " + currentValue.address.postalCode;
-                                } else {
-                                    search.value = currentValue.address.streetName + ", " + currentValue.address.postalCode;
-                                }
-                                
-                                // Faccio scomparire lista indirizzi consigliati
-                                menuAutoCompleteClass.add('d-none');
-                                ulList.innerHTML = '';
-                                
-                                // Cambio i valori degli input invisibili #latitude e #longitute
-                                city.value = currentValue.address.localName;
-                                state.value = currentValue.address.country;
-                                latitude.value = currentValue.position.lat;
-                                longitude.value = currentValue.position.lon;
-                            })
-                            
+                                () => {
+                                    // Aggiorno campo indirizzo
+                                    if (currentValue.address.streetNumber) {
+                                        search.value = currentValue.address.streetName + ", " +
+                                            currentValue.address.streetNumber + ", " + currentValue
+                                            .address.postalCode;
+                                    } else {
+                                        search.value = currentValue.address.streetName + ", " +
+                                            currentValue.address.postalCode;
+                                    }
+
+                                    // Faccio scomparire lista indirizzi consigliati
+                                    menuAutoCompleteClass.add('d-none');
+                                    ulList.innerHTML = '';
+
+                                    // Cambio i valori degli input invisibili #latitude e #longitute
+                                    city.value = currentValue.address.localName;
+                                    state.value = currentValue.address.country;
+                                    latitude.value = currentValue.position.lat;
+                                    longitude.value = currentValue.position.lon;
+                                })
+
                             // Infine aggiungo alla lista
                             ulList.appendChild(li);
                         }
-                        
+
                     });
                 };
             });
