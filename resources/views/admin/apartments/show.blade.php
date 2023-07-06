@@ -5,6 +5,9 @@
         <a class="btn btn-primary my-4 " href="{{ route('admin.apartments.index') }}">Back to your
             apartments</a>
     </div>
+    <div class="d-flex flex-row-reverse">
+        <a class="btn btn-primary my-4 " href="{{ route('admin.sponsors.index') }}">Sponsor your apartment</a>
+    </div>
     <h1>{{ $apartment->name }}</h1>
     <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
 
