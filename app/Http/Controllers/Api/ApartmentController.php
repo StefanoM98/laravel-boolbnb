@@ -20,31 +20,60 @@ class ApartmentController extends Controller
             $array_id[] = $value;
         }
 
-        $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
-            ->select('apartments.*')
-            ->with(['sponsors' => function ($query) {
-                $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
-                    ->orderBy('end_date', 'asc');
-            }])
-            ->with('services')
-            ->where('visibility', '1')
-            ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
-            ->orderBy('updated_at', 'DESC')
-            ->paginate(40);
-
         // if (request()->input('address')) {
-        //     $address = request()->input('address');
 
-        //     $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')->select('apartments.*')->with(['sponsors' => function ($query) {
-        //         $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
-        //     }])->with('services')->where('address', 'like', '%' . $address . '%')->where('visibility', '1')->orderBy('update_at', 'DESC');
-        // } else {
-        //     $apartments = Apartment::leftJoin('apartment_sponsor', 'apartment_id', '=', 'apartment_sponsor.apartment_id')->select('apartments.*')->with(['sponsors' => function ($query) {
-        //         $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
-        //     }])->with('services')->where('visibility', '1')->orderBy('update_at', 'DESC');
+
+
+
+
+        // $apartments = Apartment::all()
+        //     ->with(['sponsors' => function ($query) {
+        //         $query->where('expiring_date', '>=', Date('Y-m-d H:m:s'))->orderBy('expiring_date', 'asc');
+        //     }])
+        //     ->with('services')
+        //     ->where('city', 'like', '%' . $address . '%')
+        //     ->where("visibility", "1")
+        //     // CASE WHEN - THEN - ELSE - END
+        //     // ->orderByRaw('CASE WHEN apartment_sponsor.expiring_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.expiring_date ASC', [Date('Y-m-d H:m:s')])
+        //     ->orderBy('updated_at', 'DESC')
+        //     // PAGINAZIONE DA REINSERIRE DOPO AVER RISOLTO BUG FILTRI
+        //     ->paginate(50);
+        // ->get();
+        // }
+        // else {
+
+        //     // ---- QUERY SQL ---- //
+        //     // SELECT *
+        //     // FROM `apartments`
+        //     // LEFT JOIN `apartment_sponsor` ON `apartments`.`id` = `apartment_sponsor`.`apartment_id`
+        //     // WHERE `apartment_sponsor`.`expiring_date` >= NOW()
+        //     // ORDER BY `apartments`.`updated_at` DESC ;
+        //     // -------- //
+
+        //     // Query appartamenti
+        //     $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+        //         ->select('apartments.*')
+        //         ->with(['sponsors' => function ($query) {
+        //             $query->where('expiring_date', '>=', Date('Y-m-d H:m:s'))
+        //                 ->orderBy('expiring_date', 'asc');
+        //         }])
+        //         ->with('services')
+        //         ->where("visibility", "1")
+        //         // CASE WHEN - THEN - ELSE - END
+        //         ->orderByRaw('CASE WHEN apartment_sponsor.expiring_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.expiring_date ASC', [Date('Y-m-d H:m:s')])
+        //         ->orderBy('updated_at', 'DESC')
+        //         // PAGINAZIONE DA REINSERIRE DOPO AVER RISOLTO BUG FILTRI
+        //         ->paginate(50);
+        //     // ->get();
+
         // }
 
-        // $apartments = Apartment::all();
+        $address = 'Roma';
+
+        $apartments = Apartment::where('city', 'like', '%' . $address . '%')
+            ->orWhere('address', 'like', '%' . $address . '%')
+            ->get();
+
 
         foreach ($apartments as $apartment) {
             $apartment->image = $apartment->getImageUri();
@@ -86,7 +115,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::whereHas('sponsors', function ($query) {
             $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
-            ->orderBy('end_date', 'DESC');
+                ->orderBy('end_date', 'DESC');
         })->paginate(20);
 
         foreach ($apartments as $apartment) {
