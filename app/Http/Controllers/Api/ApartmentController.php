@@ -78,7 +78,7 @@ class ApartmentController extends Controller
 
         return response()->json([
             'success' => true,
-            'result' => $apartment
+            'results' => $apartment
         ]);
     }
 
@@ -97,7 +97,7 @@ class ApartmentController extends Controller
             'success' => true,
             'code' => 200,
             'message' => 'List of sponsored apartments',
-            'apartments' => $apartments,
+            'results' => $apartments,
         ]);
     }
 }
