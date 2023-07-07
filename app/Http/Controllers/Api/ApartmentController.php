@@ -20,68 +20,53 @@ class ApartmentController extends Controller
             $array_id[] = $value;
         }
 
-        // if (request()->input('address')) {
+        // Test chiamata api in base all'indirizzo
 
+        // $address = null;
 
-
-
-
-        // $apartments = Apartment::all()
+        // $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+        //     ->select('apartments.*')
+        //     ->where('city', 'like', '%' . $address . '%')
+        //     ->orWhere('address', 'like', '%' . $address . '%')
         //     ->with(['sponsors' => function ($query) {
-        //         $query->where('expiring_date', '>=', Date('Y-m-d H:m:s'))->orderBy('expiring_date', 'asc');
+        //         $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
         //     }])
         //     ->with('services')
-        //     ->where('city', 'like', '%' . $address . '%')
-        //     ->where("visibility", "1")
-        //     // CASE WHEN - THEN - ELSE - END
-        //     // ->orderByRaw('CASE WHEN apartment_sponsor.expiring_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.expiring_date ASC', [Date('Y-m-d H:m:s')])
+        //     ->where('visibility', '1')
+        //     ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
         //     ->orderBy('updated_at', 'DESC')
-        //     // PAGINAZIONE DA REINSERIRE DOPO AVER RISOLTO BUG FILTRI
         //     ->paginate(50);
-        // ->get();
-        // }
-        // else {
 
-        //     // ---- QUERY SQL ---- //
-        //     // SELECT *
-        //     // FROM `apartments`
-        //     // LEFT JOIN `apartment_sponsor` ON `apartments`.`id` = `apartment_sponsor`.`apartment_id`
-        //     // WHERE `apartment_sponsor`.`expiring_date` >= NOW()
-        //     // ORDER BY `apartments`.`updated_at` DESC ;
-        //     // -------- //
+        // Test completato con successo
 
-        //     // Query appartamenti
-        //     $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
-        //         ->select('apartments.*')
-        //         ->with(['sponsors' => function ($query) {
-        //             $query->where('expiring_date', '>=', Date('Y-m-d H:m:s'))
-        //                 ->orderBy('expiring_date', 'asc');
-        //         }])
-        //         ->with('services')
-        //         ->where("visibility", "1")
-        //         // CASE WHEN - THEN - ELSE - END
-        //         ->orderByRaw('CASE WHEN apartment_sponsor.expiring_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.expiring_date ASC', [Date('Y-m-d H:m:s')])
-        //         ->orderBy('updated_at', 'DESC')
-        //         // PAGINAZIONE DA REINSERIRE DOPO AVER RISOLTO BUG FILTRI
-        //         ->paginate(50);
-        //     // ->get();
+        //Condizione nel caso in cui il cliente scrive qualcosa nel campo input
 
-        // }
-
-        $address = null;
-
-        $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
-            ->select('apartments.*')
-            ->where('city', 'like', '%' . $address . '%')
-            ->orWhere('address', 'like', '%' . $address . '%')
-            ->with(['sponsors' => function ($query) {
-                $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
-            }])
-            ->with('services')
-            ->where('visibility', '1')
-            ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
-            ->orderBy('updated_at', 'DESC')
-            ->paginate(50);
+        if (request()->input('address')) {
+            $address = request()->input('address');
+            $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+                ->select('apartments.*')
+                ->where('city', 'like', '%' . $address . '%')
+                ->orWhere('address', 'like', '%' . $address . '%')
+                ->with(['sponsors' => function ($query) {
+                    $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
+                }])
+                ->with('services')
+                ->where('visibility', '1')
+                ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(50);
+        } else {
+            $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+                ->select('apartments.*')
+                ->with(['sponsors' => function ($query) {
+                    $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
+                }])
+                ->with('services')
+                ->where('visibility', '1')
+                ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(50);
+        }
 
 
         foreach ($apartments as $apartment) {
@@ -97,11 +82,6 @@ class ApartmentController extends Controller
             'success' => true,
             'results' => $apartments
         ]);
-
-        // dd(response()->json([
-        //     'success' => true,
-        //     'result' => $apartment
-        // ]));
     }
 
     public function show($slug)
