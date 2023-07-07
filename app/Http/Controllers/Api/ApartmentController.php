@@ -68,11 +68,20 @@ class ApartmentController extends Controller
 
         // }
 
-        $address = 'Roma';
+        $address = null;
 
-        $apartments = Apartment::where('city', 'like', '%' . $address . '%')
+        $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+            ->select('apartments.*')
+            ->where('city', 'like', '%' . $address . '%')
             ->orWhere('address', 'like', '%' . $address . '%')
-            ->get();
+            ->with(['sponsors' => function ($query) {
+                $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
+            }])
+            ->with('services')
+            ->where('visibility', '1')
+            ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(50);
 
 
         foreach ($apartments as $apartment) {
