@@ -21,15 +21,15 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-wifi',
             ],
             [
-                'name' => 'Parcheggio',
+                'name' => 'Parking',
                 'icon' => 'fa-solid fa-square-parking',
             ],
             [
-                'name' => 'Piscina',
+                'name' => 'Pool',
                 'icon' => 'fa-solid fa-person-swimming',
             ],
             [
-                'name' => 'Portineria',
+                'name' => 'Reception',
                 'icon' => 'fa-solid fa-bell-concierge',
             ],
             [
@@ -37,7 +37,7 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-spa',
             ],
             [
-                'name' => 'Vista mare',
+                'name' => 'Sea View',
                 'icon' => 'fa-solid fa-water',
             ],
             [
@@ -45,43 +45,43 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-tv',
             ],
             [
-                'name' => 'Riscaldamento',
+                'name' => 'Heating',
                 'icon' => 'fa-solid fa-temperature-low ',
             ],
             [
-                'name' => 'Aria condizionata',
+                'name' => 'Air Conditioning',
                 'icon' => 'fa-solid fa-fan',
             ],
             [
-                'name' => 'Bagno privato',
+                'name' => 'Private Bathroom',
                 'icon' => 'fa-solid fa-toilet',
             ],
             [
-                'name' => 'Colazione inclusa',
+                'name' => 'Breakfast incluted',
                 'icon' => 'fa-solid fa-mug-hot',
             ],
             [
-                'name' => 'Vista panoramica',
+                'name' => 'Panoramic View',
                 'icon' => 'fa-solid fa-mountain-sun',
             ],
             [
-                'name' => 'Cucina',
+                'name' => 'Kitchen',
                 'icon' => 'fa-solid fa-fire-burner',
             ],
             [
-                'name' => 'Lavatrice',
+                'name' => 'Washing Machine',
                 'icon' => 'fa-solid fa-soap',
             ],
             [
-                'name' => 'Asciugacapelli',
+                'name' => 'Hairdryer',
                 'icon' => 'fa-solid fa-wind',
             ],
             [
-                'name' => 'Idromassaggio',
+                'name' => 'Hydromassage',
                 'icon' => 'fa-solid fa-hot-tub-person',
             ],
             [
-                'name' => 'Domotica',
+                'name' => 'Domotics',
                 'icon' => 'fa-solid fa-robot',
             ],
             [
@@ -89,27 +89,27 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fa-solid fa-stroopwafel',
             ],
             [
-                'name' => 'Giardino',
+                'name' => 'Garden',
                 'icon' => 'fa-solid fa-tree',
             ],
             [
-                'name' => 'Culla',
+                'name' => 'Crib',
                 'icon' => 'fa-solid fa-baby-carriage',
             ],
             [
-                'name' => 'Ferro da stiro',
+                'name' => 'Iron',
                 'icon' => 'fa-solid fa-shirt',
             ],
             [
-                'name' => 'Set di cortesia',
+                'name' => 'Courtesy Set',
                 'icon' => 'fa-solid fa-spray-can-sparkles',
             ],
             [
-                'name' => 'Camino',
+                'name' => 'Chimney',
                 'icon' => 'fa-solid fa-fire'
             ],
             [
-                'name' => 'Accessibilità',
+                'name' => 'Accessibility',
                 'icon' => 'fa-solid fa-wheelchair-move',
             ],
         ];

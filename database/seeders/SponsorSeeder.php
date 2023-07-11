@@ -20,19 +20,19 @@ class SponsorSeeder extends Seeder
                 'name' => 'Bronze',
                 'price' => 2.99,
                 'duration' => 24,
-                'description' => 'Sponsorizza il tuo annuncio per 24 ore',
+                'description' => 'Sponsor your advertisement for 24 hours',
             ],
             [
                 'name' => 'Gold',
                 'price' => 4.99,
                 'duration' => 72,
-                'description' => 'Sponsorizza il tuo annuncio per 72 ore',
+                'description' => 'Sponsor your advertisement for 72 hours',
             ],
             [
                 'name' => 'Platinum',
                 'price' => 9.99,
                 'duration' => 144,
-                'description' => 'Sponsorizza il tuo annuncio per 144 ore',
+                'description' => 'Sponsor your advertisement for 144 hours',
             ],
         ];
 

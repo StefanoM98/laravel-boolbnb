@@ -54,7 +54,7 @@
     @else
         <span>
             <p class="text-center fs-2 fw-bold">
-                Non ci sono ancora appartamenti
+                You have not entered any ads yet
             </p>
         </span>
     @endif
