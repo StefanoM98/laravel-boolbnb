@@ -11,7 +11,9 @@ class ApartmentSponsor extends Model
 
     protected $fillable = [
         'apartment_id',
-        'sponsor_id'
+        'sponsor_id',
+        'start_date',
+        'end_date'
     ];
 
     protected $table = 'apartment_sponsor';

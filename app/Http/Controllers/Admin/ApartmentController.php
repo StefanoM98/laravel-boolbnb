@@ -7,6 +7,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -93,6 +94,15 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         $user = Auth::user();
+        $today = Carbon::today();
+
+        $apartment['sponsored'] = false;
+
+        $sponsorized = $apartment->sponsors()->where('end_date', '>', $today)->first();
+
+        if ($sponsorized) {
+            $apartment['sponsored'] = true;
+        }
         $apartments = Apartment::where('user_id', $user->id)->get();
         return view('admin.apartments.show', compact('apartment'));
     }
