@@ -92,7 +92,7 @@
                     @else
                         <div class="col">
                             <div class="d-flex justify-content-center align-items-center fs-4 mt-5">
-                                <p>Nessun appartamento da sponsorizzare</p>
+                                <p>No apartments found</p>
                             </div>
                         </div>
                     @endif
@@ -139,7 +139,7 @@
                             <div class="text-center my-3">
                                 <a href="{{ route('admin.payment.clientToken', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id, 'slug' => $apartment->slug]) }}"
                                     class="btn btn-success">
-                                    Procedi al pagamento
+                                    Complete payment process
                                 </a>
                             </div>
                         </div>

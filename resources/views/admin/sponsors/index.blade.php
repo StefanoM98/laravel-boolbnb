@@ -9,7 +9,7 @@
     </div>
 
     <section id="sponsors_list" class="container py-5">
-        <h3 class="mt-5 text-primary">Scegli la sponsorizzazione che preferisci:</h3>
+        <h3 class="mt-5 text-primary">Choose the sponsorship you prefer:</h3>
 
         <div class="row">
             @forelse($sponsors as $sponsor)
@@ -32,14 +32,14 @@
                             </div>
                             <div class="card-footer">
                                 <p class="p-2">
-                                    Sponsorizza per una durata di {{ $sponsor->duration }} ore
+                                    Get sponsored for a duration of {{ $sponsor->duration }} h
                                 </p>
                             </div>
                         </div>
                     </a>
                 </div>
             @empty
-                <h2>Non ci sono sponsor</h2>
+                <h2>There are no Sponsors</h2>
             @endforelse
         </div>
     </section>

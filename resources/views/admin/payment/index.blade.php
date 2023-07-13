@@ -27,15 +27,17 @@
             </div>
         </div>
         {{-- div fornito da Braintree per il layout --}}
-        <div>
-            <div id="dropin-container"></div>
-            <button id="submit-button" class="btn btn-primary">Buy</button>
-        </div>
-
-        <div class="d-flex justify-content-end">
-            <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary m-3">
-                Go back to sponsor's page
-            </a>
+        <div id="dropin-container"></div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button id="submit-button" class="btn btn-primary">Buy</button>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary">
+                    Go back to sponsor's page
+                </a>
+            </div>
         </div>
     </section>
 @endsection
