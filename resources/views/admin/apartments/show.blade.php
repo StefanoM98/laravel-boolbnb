@@ -22,7 +22,7 @@
     <div class="d-flex flex-row-reverse">
         @if ($apartment->visibility == false)
                 <div>
-                    <a href="{{ route('admin.apartments.publish', $apartment->slug) }}"
+                    <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
                         class="btn btn-success ms-3">
                         Publish
                     </a>
