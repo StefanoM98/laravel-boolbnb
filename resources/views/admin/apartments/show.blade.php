@@ -10,12 +10,12 @@
                 <div>
                     <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
                         class="btn btn-success ms-3">
-                        Sponsorizza
+                        Get sponsor
                     </a>
                 </div>
             @else
                 <span class="ms-3 fs-4 fw-bold text-success">
-                    SPONSORIZZATO
+                    SPONSORIZED
                 </span>
             @endif
     </div>

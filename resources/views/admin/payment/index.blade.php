@@ -18,23 +18,23 @@
             <div class="col position-relative">
                 <div id="isSent" class="text-bg-success message success d-none align-items-center justify-content-center">
                     <i class="fa-solid fa-circle-check fa-fade"></i>
-                    <span class="ms-2 me-4">Pagamento effettuato! <br> Verrai reinderizzato alla home...</span>
+                    <span class="ms-2 me-4">Payment done! <br> You will be redirected to the apartment's page...</span>
                 </div>
                 <div id="isSentNone" class="text-bg-danger message danger d-none align-items-center justify-content-center">
                     <i class="fa-solid fa-circle-check fa-fade"></i>
-                    <span class="ms-2 me-4">Pagamento respinto!</span>
+                    <span class="ms-2 me-4">Payment rejected!</span>
                 </div>
             </div>
         </div>
         {{-- div fornito da Braintree per il layout --}}
         <div>
             <div id="dropin-container"></div>
-            <button id="submit-button" class="btn btn-primary">Acquista</button>
+            <button id="submit-button" class="btn btn-primary">Buy</button>
         </div>
 
         <div class="d-flex justify-content-end">
             <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary m-3">
-                Torna agli sponsor
+                Go back to sponsor's page
             </a>
         </div>
     </section>
@@ -96,7 +96,7 @@
                             }, 5000);
 
 
-                            alert('Pagamento fallito. Riprova');
+                            alert('Payment Failed. Retry');
                         }
                     }, 'json');
                 });

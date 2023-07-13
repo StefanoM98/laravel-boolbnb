@@ -83,6 +83,7 @@ class PaymentController extends Controller
             $sponsored_apartment = new ApartmentSponsor();
             $sponsored_apartment->apartment_id = $apartment_id;
             $sponsored_apartment->sponsor_id = $sponsor_id;
+            $sponsored_apartment->start_date = $now;
             $sponsored_apartment->end_date = date("Y-m-d H:i:s", strtotime('+' . $sponsor->duration . 'hours', strtotime($now)));
             $sponsored_apartment->save();
         }

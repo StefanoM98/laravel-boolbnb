@@ -10,7 +10,7 @@
 
     <section class="container">
 
-        <h3 class="mt-5 text-primary">Sponsorizza il tuo appartamento</h3>
+        <h3 class="mt-5 text-center text-primary">Buy a sponsor for your apartment</h3>
 
         <div id="sponsor_show" class="container h-100">
             <div class="row gy-5 mt-5 mt-md-0 d-flex justify-content-center mb-5">
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="my-card-footer text-end">
                                     <p class="text-muted p-2">
-                                        Sponsorizza per una durata di {{ $sponsor->duration }} ore
+                                        Get sponsored for a duration of {{ $sponsor->duration }} h
                                     </p>
                                 </div>
                             </div>
@@ -116,11 +116,11 @@
                             </div>
                             <div class="my-card-footer text-end">
                                 <p class="text-warning p-2">
-                                    Sponsorizza per una durata di {{ $sponsor->duration }} ore
+                                    Get sponsored for a duration of {{ $sponsor->duration }} h
                                 </p>
                                 <div>
                                     <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary m-3">
-                                        Torna agli sponsor
+                                        Go back to sponsor's page
                                     </a>
                                 </div>
                             </div>
@@ -128,10 +128,10 @@
 
                     </div>
 
-                    <div class="col-sm-12 col-md-6 d-flex justify-content-center align-items-center sponsor-show-card">
+                    <div class="col-sm-12 col-md-6 d-flex justify-content-center sponsor-show-card">
                         <div class="my-apartment-card">
-                            <h2 class="text-center text-white px-2 py-3">{{ $apartment->name }}</h2>
-                            <div class="px-5 pt-5">
+                            <h2 class="text-center px-2">{{ $apartment->name }}</h2>
+                            <div class="px-5">
                                 <img class="img-fluid rounded" src="{{ asset('storage/' . $apartment->image) }}">
                             </div>
 
