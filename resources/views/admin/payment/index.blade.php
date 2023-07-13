@@ -52,7 +52,7 @@
         // Salviamo i valori dei parametri nell'url
         let sponsor = urlParams.get('sponsor_id');
         let apartment = urlParams.get('apartment_id');
-
+        console.log(sponsor, apartment);
         // Script Braintree
         braintree.dropin.create({
             authorization: '{{ $token }}',
@@ -65,15 +65,11 @@
             instance = dropinInstance;
             button.addEventListener('click', function() {
                 instance.requestPaymentMethod(function(err, payload) {
-                    console.log($.get('{{ route('admin.payment.process') }}', {
+                    // API alla funzione make del PaymentController passando i parametri payload, sponsor e apartment
+                    $.get('{{ route('admin.payment.make') }}', {
                         payload,
-                        // sponsor,
-                        // apartment,
-                    }));// API alla funzione make del PaymentController passando i parametri payload, sponsor e apartment
-                    $.get('{{ route('admin.payment.process') }}', {
-                        payload,
-                        // sponsor,
-                        // apartment,
+                        sponsor,
+                        apartment,
                     }, function(response) {
                         if (response.success) {
                             // messaggio di successo

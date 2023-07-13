@@ -31,7 +31,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
     Route::resource('sponsors', SponsorController::class)->only(['index', 'show']);
     Route::any('payment/clientToken', [PaymentController::class, 'clientToken'])->name('payment.clientToken');
-    Route::get('payment/process', [PaymentController::class, 'process'])->name('payment.process');
+    Route::get('payment/make', [PaymentController::class, 'make'])->name('payment.make');
 });
 
 

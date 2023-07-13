@@ -41,6 +41,7 @@ class PaymentController extends Controller
 
             // Generi il token
             $clientToken = $gateway->clientToken()->generate();
+
             // Ritorni la vista passando il token
             return view('admin.payment.index', ['token' => $clientToken]);
 
@@ -51,7 +52,7 @@ class PaymentController extends Controller
     }
 
     // Funzione che gestisce il pagamento
-    public function process(Request $request)
+    public function make(Request $request)
     {
 
         // Creo variabile payload e nonce
@@ -61,9 +62,9 @@ class PaymentController extends Controller
         // Recupero sponsor_id e apartment_id
         $sponsor_id =  request()->input('sponsor');
         $apartment_id =  request()->input('apartment');
-
         // Recupero lo sponsor associato a quello sponsor_id
         $sponsor = Sponsor::where('id', $sponsor_id)->first();
+
 
         // Creo transazione
         $status = Transaction::sale([
