@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
@@ -91,5 +92,37 @@ class MessageController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Funzione per la validazione dei dati
+    private function validation($data) 
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'apartment_id' => 'required|integer|exists:apartments,id',
+                'name' => 'required|string|max:100',
+                'email' => 'required|string|max:100|email',
+                'text' => 'required|string|max:65535',
+            ],
+            [
+                'apartment_id.required' => "L'ID dell'appartamento è obbligatorio",
+                'apartment_id.integer' => "L'ID dell'appartamento deve essere un numero intero",
+
+               'name.required' => "Il nome del mittente è obbligatorio", 
+               'name.string' => "Il nome del mittente deve essere una stringa",
+               'name.max' => "Il nome del mittente può contenere massimo 100 caratteri",
+    
+               'email.required' => "L'indirizzo email è obbligatorio", 
+               'email.string' => "L'indirizzo email deve essere una stringa",
+               'email.max' => "L'indirizzo email può contenere massimo 100 caratteri",
+               'email.email' => "L'indirizzo email deve per forza essere un indirizzo email valido",
+    
+               'text.required' => "Il testo del messaggio è obbligatorio", 
+               'text.string' => "Il testo del messaggio deve essere un testo",
+               'text.max' => "Il testo del messaggio può contenere massimo 65535 caratteri",
+            ])->validate();
+
+        return $validator;
     }
 }

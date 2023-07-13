@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ Route::get('sponsored-apartments', [ApartmentController::class, 'sponsoredApartm
 
 // Service Controller
 Route::apiResource('services', ServiceController::class)->only('index');
+
+// Message Controller
+Route::post('messages', [MessageController::class, 'store']);
 
 // Login Controller
 Route::get('/login', [LoginController::class, 'login'])->name('api.login');

@@ -64,11 +64,6 @@ class ApartmentController extends Controller
                 ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(50);
-        } elseif (request()->input('services_id')) {
-            $services = request()->input('services_id');
-            $apartments = Apartment::whereHas('services', function ($query) use ($services) {
-                $query->where('id', '=', $services);
-            })->get();
         } else {
             $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
                 ->select('apartments.*')
@@ -82,7 +77,12 @@ class ApartmentController extends Controller
                 ->paginate(50);
         }
 
-
+        if (request()->input('services_id')) {
+            $services = request()->input('services_id');
+            $apartments = Apartment::whereHas('services', function ($query) use ($services) {
+                $query->where('id', '=', $services);
+            })->get();
+        }
         // foreach ($apartments as $apartment) {
         //     $apartment->image = $apartment->getImageUri();
         //     if (in_array($apartment['id'], $array_id)) {
@@ -94,7 +94,7 @@ class ApartmentController extends Controller
 
         return response()->json([
             'success' => true,
-            'results' => $apartments
+            'results' => $apartments,
         ]);
     }
 
@@ -110,7 +110,7 @@ class ApartmentController extends Controller
 
         return response()->json([
             'success' => true,
-            'results' => $apartment
+            'results' => $apartment,
         ]);
     }
 
