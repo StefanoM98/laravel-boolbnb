@@ -66,12 +66,12 @@
                                         <tr>
                                             <td class="d-none d-md-table-cell align-middle text-center">
                                                 <div class="my-image-container">
-                                                    <img src="{{ $apartment->image }}"
+                                                    <img src="{{ asset('storage/' . $apartment->image) }}"
                                                         alt=" {{ $apartment->name }}" class="img-fluid rounded">
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                {{ $apartment->title }}
+                                                {{ $apartment->name }}
                                             </td>
                                             <td class="d-none d-lg-table-cell align-middle">
                                                 {{ $apartment->address }}
@@ -132,12 +132,12 @@
                         <div class="my-apartment-card">
                             <h2 class="text-center text-white px-2 py-3">{{ $apartment->name }}</h2>
                             <div class="px-5 pt-5">
-                                <img class="img-fluid rounded" src="{{ $apartment->image }}">
+                                <img class="img-fluid rounded" src="{{ asset('storage/' . $apartment->image) }}">
                             </div>
 
                             {{-- Rotta payment --}}
                             <div class="text-center my-3">
-                                <a href="{{ route('admin.payment.clientToken', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
+                                <a href="{{ route('admin.payment.clientToken', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id, 'slug' => $apartment->slug]) }}"
                                     class="btn btn-success">
                                     Procedi al pagamento
                                 </a>

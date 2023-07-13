@@ -52,7 +52,8 @@
         // Salviamo i valori dei parametri nell'url
         let sponsor = urlParams.get('sponsor_id');
         let apartment = urlParams.get('apartment_id');
-        console.log(sponsor, apartment);
+        let slug = urlParams.get('slug')
+        console.log(sponsor, apartment, slug);
         // Script Braintree
         braintree.dropin.create({
             authorization: '{{ $token }}',
@@ -80,7 +81,7 @@
                                     'd-none');
                             }, 3000);
                             setTimeout(function() {
-                                window.location.replace('/admin/apartments');
+                                window.location.replace('/admin/apartments/' + slug);
                             }, 5000);
 
                             // window.location.replace('{{ route('admin.sponsors.index') }}'); 
