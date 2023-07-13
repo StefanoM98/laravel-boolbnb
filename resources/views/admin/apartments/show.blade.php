@@ -6,7 +6,18 @@
             apartments</a>
     </div>
     <div class="d-flex flex-row-reverse">
-        <a class="btn btn-primary my-4 " href="{{ route('admin.sponsors.index') }}">Sponsor your apartment</a>
+        @if ($apartment->sponsored == false)
+                <div>
+                    <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
+                        class="btn btn-success ms-3">
+                        Sponsorizza
+                    </a>
+                </div>
+            @else
+                <span class="ms-3 fs-4 fw-bold text-success">
+                    SPONSORIZZATO
+                </span>
+            @endif
     </div>
     <h1>{{ $apartment->name }}</h1>
     <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
