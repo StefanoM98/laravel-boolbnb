@@ -19,6 +19,20 @@
                 </span>
             @endif
     </div>
+    <div class="d-flex flex-row-reverse">
+        @if ($apartment->visibility == false)
+                <div>
+                    <a href="{{ route('admin.apartments.publish', $apartment->slug) }}"
+                        class="btn btn-success ms-3">
+                        Publish
+                    </a>
+                </div>
+            @else
+                <span class="ms-3 fs-4 fw-bold text-success">
+                    Published
+                </span>
+            @endif
+    </div>
     <h1>{{ $apartment->name }}</h1>
     <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
 
