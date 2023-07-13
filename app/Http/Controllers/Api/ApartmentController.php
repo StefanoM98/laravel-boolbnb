@@ -13,42 +13,13 @@ class ApartmentController extends Controller
     public function index()
     {
         $sponsored_apartment_id = Apartment::whereHas('sponsors', function ($query) {
-            $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'ASC');
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
         })->pluck('id');
 
         $array_id = [];
         foreach ($sponsored_apartment_id as $value) {
             $array_id[] = $value;
         }
-
-        // QUERY CORRETTA PERCHE MI FA VEDERE SOLO QUELLI CON SERVICE_ID 7
-
-        // $services = 7;
-
-        // $apartments = Apartment::whereHas('services', function ($query) use ($services) {
-        //     $query->where('id', '=', $services);
-        // })->get();
-
-        //fine test query corretta
-
-        // $query = Apartment::with(['services']);
-
-        // if ($request->has('services_id')) {
-        //     $query->whereHas('services', function ($pippo) use ($request) {
-        //         $pippo->whereIn('id', $request->services_id);
-        //     });
-        // }
-
-        // $apartments = $query->get();
-
-        // if (request()->input('services_id')) {
-        //     $services = request()->input('services_id');
-        //     $apartments = Apartment::whereHas('services', function ($query) use ($services) {
-        //         $query->where('id', '=', $services);
-        //     })->get();
-        // } else {
-        //     $apartments = Apartment::all();
-        // }
 
         if (request()->input('address')) {
             $address = request()->input('address');
@@ -62,18 +33,19 @@ class ApartmentController extends Controller
                 ->with('services')
                 ->where('visibility', '1')
                 ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
-                ->orderBy('updated_at', 'DESC')
+                // ->orderBy('updated_at', 'DESC')
                 ->paginate(50);
         } else {
             $apartments = Apartment::leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
                 ->select('apartments.*')
                 ->with(['sponsors' => function ($query) {
-                    $query->where('end_date', '>=', Date('Y-m-d H:m:s'))->orderBy('end_date', 'asc');
+                    $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
                 }])
                 ->with('services')
                 ->where('visibility', '1')
-                ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END, apartment_sponsor.end_date ASC', [Date('Y-m-d H:m:s')])
-                ->orderBy('updated_at', 'DESC')
+                ->orderByRaw('CASE WHEN apartment_sponsor.end_date >= ? THEN 0 ELSE 1 END', [Date('Y-m-d H:m:s')])
+                ->orderBy('created_at', 'DESC')
+                ->orderBy('id', 'desc')
                 ->paginate(50);
         }
 
@@ -83,14 +55,14 @@ class ApartmentController extends Controller
                 $query->where('id', '=', $services);
             })->get();
         }
-        // foreach ($apartments as $apartment) {
-        //     $apartment->image = $apartment->getImageUri();
-        //     if (in_array($apartment['id'], $array_id)) {
-        //         $apartment['sponsored'] = true;
-        //     } else {
-        //         $apartment['sponsored'] = false;
-        //     }
-        // }
+        foreach ($apartments as $apartment) {
+            $apartment->image = $apartment->getImageUri();
+            if (in_array($apartment['id'], $array_id)) {
+                $apartment['sponsored'] = true;
+            } else {
+                $apartment['sponsored'] = false;
+            }
+        }
 
         return response()->json([
             'success' => true,
@@ -117,9 +89,9 @@ class ApartmentController extends Controller
     public function sponsoredApartments()
     {
         $apartments = Apartment::whereHas('sponsors', function ($query) {
-            $query->where('end_date', '>=', Date('Y-m-d H:m:s'))
-                ->orderBy('end_date', 'DESC');
-        })->paginate(20);
+            $query->where('end_date', '>=', Date('Y-m-d H:m:s'));
+                
+        })->orderBy('id', 'desc')->paginate(20);
 
         foreach ($apartments as $apartment) {
             // Aggiungo chiave sponsored così da poter ordinare per appartamenti sponsorizzati
