@@ -1,11 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+<br>
+<br>
+<br>
+<br>
     <div class="container">
         <div class="row row-col-4">
             <div class="col-md-8 offset-md-2">
                 <div class="card my-3">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         Create Apartment
                     </div>
                     <div class="card-body">
@@ -73,28 +77,28 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <label>Services*</label>
-
-                                <div class="border rounded p-3">
+                            <div class="border rounded p-3 mb-3" id="services-container">
+                                <div class="row">
                                     @foreach ($services as $item)
-                                        <div class="form-check">
-                                            <input class="form-check-input @error('services') is-invalid @enderror"
-                                                type="checkbox" name="services[]" value="{{ $item->id }}"
-                                                id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
-                                            <label class="form-check-label" for="services-{{ $item->id }}">
-                                                {{ $item->name }}
-                                            </label>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('services') is-invalid @enderror"
+                                                    type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                    id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
+                                                <label class="form-check-label" for="services-{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </label>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
-                                @error('services')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
+                            @error('services')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            
 
                             <div class="form-group position-relative mb-3">
                                 <label for="address">Address*</label>
@@ -326,4 +330,17 @@
             }
         });
     </script>
+
+    <style lang="scss" scoped>
+#services-container .form-check {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767.98px) {
+    #services-container .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+    </style>
 @endsection

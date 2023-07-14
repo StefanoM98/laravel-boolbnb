@@ -53,7 +53,7 @@
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn ">
                                     {{ __('Login') }}
                                 </button>
 
@@ -70,4 +70,29 @@
         </div>
     </div>
 </div>
+
+  
+
+
+    
+<style>
+
+    .card-header{
+        border: 2px solid rgb(8, 236, 244);
+        background-color: #fff; 
+        text-align: center;
+        font-size: 23px;
+        font-weight: 700;
+    }
+    .card{
+        border: 2px solid rgb(8, 236, 244);
+        background-color: #fff; 
+    }
+    .btn{
+        background: rgb(8, 236, 244);;
+        text-decoration: none;
+        color: inherit
+    }
+   
+</style>
 @endsection

@@ -3,8 +3,9 @@
 @section('content')
     @include('partials.session_message')
     <h1 class="text-center mt-2 text-danger"> My Apartments list</h1>
-    <div class="text-center m-4">
-        <a class="btn btn-success text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+    <h1 class=" mt-2  mt-5"> Your Apartments list</h1>
+    <div class="m-4">
+        <a class="btn  btn-info " href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
     </div>
 
     @if ($apartments->count() > 0)
@@ -68,4 +69,8 @@
             return confirm('Are you sure you want to delete this Project?');
         }
     </script> --}}
+
+    <style lang="scss" scoped>
+        
+    </style>
 @endsection

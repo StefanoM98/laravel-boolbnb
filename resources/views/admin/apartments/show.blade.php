@@ -1,11 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="d-flex flex-row-reverse">
-        <a class="btn btn-primary my-4 " href="{{ route('admin.apartments.index') }}">Back to your
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="d-flex ">
+        <a class="btn btn-primary mt-5 " href="{{ route('admin.apartments.index') }}">Back to your
             apartments</a>
     </div>
-    <div class="d-flex flex-row-reverse">
+    <div class="d-flex flex-row-reverse mb-2">
         @if ($apartment->sponsored == false)
                 <div>
                     <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
@@ -33,30 +37,47 @@
                 </span>
             @endif
     </div>
-    <h1>{{ $apartment->name }}</h1>
-    <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
 
-    <div class="tomtom">
-        <h3 class="mb-4">Map:</h3>
-        <div id="map" style="width: 100%; height: 300px"></div>
+</div>
+    <div class="container">
+        <h1>{{ $apartment->name }}</h1>
+        <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} <i class="fa-solid fa-map-pin" style="color: #008799;"></i> </h3>
+        <div class="container-fluid">
+            <div class="tomtom">
+                <h3 class="mb-4">Map:</h3>
+                <div id="map" style="width: 100%; height: 300px"></div>
+            </div>
+        </div>
+
     </div>
 
-    <ul>
-        <li>Description: {{ $apartment['description'] }}</li>
+    <div class="container mb-5">
+               {{-- <li>Description: {{ $apartment['description'] }}</li>
         <li>Price: {{ $apartment['price'] }}€ per night</li>
         <li>Square maters: {{ $apartment['square_meters'] }}</li>
         <li>Bed number: {{ $apartment['bed_number'] }}</li>
         <li>Bathroom number: {{ $apartment['bathroom_number'] }}</li>
         <li>Room number: {{ $apartment['room_number'] }}</li>
-        <li>
-            Services:
+        <li> --}}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light"><span class="bold">Details</span></li>
+                <li class="list-group-item "><span class="bold">Description:</span> {{ $apartment['description'] }}</li>
+                <li class="list-group-item bg-light "><span class="bold">Price:</span> {{ $apartment['price'] }}€ per night</li>
+                <li class="list-group-item  " ><span class="bold">Square maters:</span> {{ $apartment['square_meters'] }}</li>
+                <li class="list-group-item bg-light "><span class="bold">Bed number:</span> {{ $apartment['bed_number'] }}</li>
+                <li class="list-group-item  " ><span class="bold">Bathroom number:</span> {{ $apartment['bathroom_number'] }}</li>
+                <li class="list-group-item bg-light "><span class="bold">Room number:</span> {{ $apartment['room_number'] }}</li>
+              
+            <span class="bold">Services:</span>
             @forelse ($apartment->services as $service)
                 {{ $service->name }}{{ $loop->last ? '.' : ', ' }}
             @empty
             @endforelse
         </li>
     </ul>
-    @if ($apartment->image)
+    </div>
+    <div class="container">
+        @if ($apartment->image)
         <figure class="w-50">
             <img class="w-50" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
         </figure>
@@ -70,9 +91,11 @@
         @if (!$apartment->visibility)
             The announcement is ready to be published
         @else
-            The announcement is online
+            The announcement is online <i class="fa-solid fa-signal online" style="color: #00fb08;"></i>
         @endif
     </div>
+    </div>
+
     <br>
 
     <script>
@@ -90,4 +113,28 @@
                 .addTo(map);
         })
     </script>
+
+    <style lang="scss" scoped>
+        #map{
+            border: 2px solid #008799;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+        }
+        .bold{
+            font-weight: 700;
+        }
+        .online {
+animation:1s blinker linear infinite;
+color: rgb(0, 187, 6);
+font-size:18px;
+font-weight:bold;
+}
+.online a {color:rgb(0, 130, 39);}
+@keyframes blinker { 
+0% { opacity: 1.0; }
+50% { opacity: 0.0; }
+100% { opacity: 1.0; }
+}
+
+    </style>
 @endsection
