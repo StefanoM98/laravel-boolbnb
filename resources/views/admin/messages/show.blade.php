@@ -6,7 +6,7 @@
             <a class="btn btn-primary my-4 " href="{{ route('admin.messages.index') }}">Back to your
                 other messages</a>
         </div>
-        <h4>Message by {{ $message->email }}</h4>
+        <h4>Message by {{ $message->email }} </h4>
 
         <div class="card">
             <div class="card-body">
@@ -14,7 +14,9 @@
 
                 <p class="card-text">{{ $message->text }}</p>
                 <p class="card-text">Sent at: {{ $message->created_at }}</p>
+                
             </div>
         </div>
+        <a href="mailto:{{$message->email}}?subject=Informations%20apartments:%20'{{$apartment['name']}}'" class="btn btn-primary">Answer</a>
     </div>
 @endsection

@@ -55,10 +55,8 @@ class MessageController extends Controller
         foreach ($apartments as $apartment) {
             $myApartments[] = $apartment['id'];
         }
-
-
         if (in_array($message->apartment_id, $myApartments)) {
-            return view('admin.messages.show', compact('message'));
+            return view('admin.messages.show', compact('message', 'apartment'));
         } else {
             abort(403, 'you are not authorized');
         }
