@@ -1,6 +1,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,21 +58,21 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
+                                <a class="nav-link text-black {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-white rounded' : '' }}"
                                     href="{{ route('admin.dashboard') }}">
                                     <i class="fa-solid fa-chart-line"></i> Dashboard
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
+                                <a class="nav-link text-black {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-white rounded' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house"></i> Apartments
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
+                                <a class="nav-link text-black position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-white rounded' : '' }}"
                                     href="{{ route('admin.messages.index') }}">
                                     <i class="fa-solid fa-message"></i> Messages
                                     @php
@@ -108,9 +109,11 @@
 </html>
 
 <style lang="scss" scoped>
-@import 'variables';
+    :root {
+        --primary-color: #24ADE3
+    }
     .ms_nav {
-        background-color: $dark_accent_color
+        background-color: var(--primary-color)
     }
     .navbar-toggler:focus {
         box-shadow: none
