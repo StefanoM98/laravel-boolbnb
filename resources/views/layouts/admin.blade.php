@@ -30,7 +30,7 @@
 
         <header style="height: 60px;" class="navbar fixed-top flex-md-nowrap ms_nav p-2">
             <div class="row justify-content-between">
-                <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
+                <a class="navbar-brand text-white col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
                 <button class="navbar-toggler position-absolute d-md-none border-0 collapsed" type="button"
                     data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
             </div>
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link mx-3" href="{{ route('logout') }}"
+                    <a class="nav-link mx-3 text-white" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -58,21 +58,21 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a class="nav-link text-black {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-white rounded' : '' }}"
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'text-black rounded' : 'text-white' }}"
                                     href="{{ route('admin.dashboard') }}">
                                     <i class="fa-solid fa-chart-line"></i> Dashboard
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-white rounded' : '' }}"
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'text-black rounded' : 'text-white' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house"></i> Apartments
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-black position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-white rounded' : '' }}"
+                                <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'text-black rounded' : 'text-white' }}"
                                     href="{{ route('admin.messages.index') }}">
                                     <i class="fa-solid fa-message"></i> Messages
                                     @php
