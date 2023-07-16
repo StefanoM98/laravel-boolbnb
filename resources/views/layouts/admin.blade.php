@@ -116,7 +116,7 @@
 
 <style lang="scss" scoped>
     :root {
-        --primary-color: #24ADE3
+        --primary-color: #24ADE3;
     }
     .nav-link {
         color: white;

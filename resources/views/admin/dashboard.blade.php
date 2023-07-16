@@ -71,4 +71,8 @@
     ul li::marker {
         color: var(--primary-color)
     }
+
+    .ms_color {
+        color: var(--primary-color)
+    }
 </style>
