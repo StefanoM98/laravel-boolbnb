@@ -28,7 +28,7 @@
 <body>
     <div id="app" class="vh-100">
 
-        <header style="height: 60px;" class="navbar fixed-top flex-md-nowrap ms_nav p-2">
+        <header style="height: 60px;" class="navbar fixed-top shadow flex-md-nowrap ms_nav p-2">
             <div class="row justify-content-between">
                 <a class="navbar-brand text-white col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
                 <button class="navbar-toggler position-absolute d-md-none border-0 collapsed" type="button"
@@ -53,7 +53,7 @@
 
         <div class="container-fluid" style="height: calc(100% - 60px); padding-top: 60px">
             <div class="row h-100 position-sticky">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse h-100 position-fixed ms_nav" style="z-index: 999;">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar h-100 collapse position-fixed ms_nav" style="z-index: 999;">
                     <div class="pt-3">
                         <ul class="nav flex-column">
 
