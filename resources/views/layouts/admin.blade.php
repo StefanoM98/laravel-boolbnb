@@ -25,129 +25,15 @@
     @yield('head')
 </head>
 
-<body>
-    {{-- <div id="app" class="vh-100">
-
-        <header style="height: 60px;" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-2">
-            <div class="row justify-content-between">
-                <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
-                <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="navbar-nav">
-                <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link mx-3" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-            </div>
-        </header>
-
-        <div class="container-fluid" style="height: calc(100% - 60px); padding-top: 60px">
-            <div class="row h-100 position-sticky">
-
-
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse h-100 position-fixed" style="z-index: 999;">
-                    <div class="pt-3">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-chart-line"></i> Dashboard
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.apartments.index') }}">
-                                    <i class="fa-solid fa-house"></i> Apartments
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.messages.index') }}">
-                                    <i class="fa-solid fa-message"></i> Messages
-                                    @php
-                                        if ($messages) {
-                                            $count = $messages->where('state_message', false)->count();
-                                        }
-                                    @endphp
-                                    @if ($count)
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {{$count}}
-                                            <span class="visually-hidden">unread messages</span>
-                                        </span>
-                                    @endif
-                                </a>
-                            </li>
-
-
-                        </ul>
-
-
-                    </div>
-                </nav>
-
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    @yield('content')
-                </main>
-            </div>
-        </div>
-        @include('partials.modal_delete')
-    </div>
-    @yield('scripts')
-</body> --}}
-
     <body>
         <div id="app">
             <div class="container-fluid vh-100">
                 <div class="row h-100">
 
-<<<<<<< HEAD
-                <nav class="navbar">
-                  <div class="logo_item">
-                    <i class="bx bx-menu" id="sidebarOpen"></i>
-                    BoolBnB
-                  </div>
-                  <div class="search_bar">
-                    
-                  </div>
-                  <div class="navbar_content">
-                    <i class="bi bi-grid"></i>
-                    <i class='bx bx-sun' id="darkLight"></i>
-                    <i class='bx bx-bell' ></i>
-
-                  </div>
-                </nav>
-                <nav class="sidebar">
-                  <div class="menu_content">
-                    <ul class="menu_items">
-                      <div class="menu_title menu_dahsboard"></div>
-                      <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
-                      <!-- start -->
-                      <li class="item">
-                        <div href="#" class="nav_link submenu_item">
-                          <span class="navlink_icon">
-                            <i class="bx bx-home-alt"></i>
-                          </span>
-                          <span class="navlink">Home</span>
-                          
-=======
                     <nav class="navbar">
                         <div class="logo_item">
                             <i class="bx bx-menu" id="sidebarOpen"></i>
-                            <img src="images/logo.png" alt=""></i>BoolBnB
->>>>>>> c8bcbc03b18e43bc148f8ff49f1357b8171933a8
+                            BoolBnB
                         </div>
                         <div class="search_bar">
 
@@ -156,7 +42,6 @@
                             <i class="bi bi-grid"></i>
                             <i class='bx bx-sun' id="darkLight"></i>
                             <i class='bx bx-bell'></i>
-                            <img src="images/profile.jpg" alt="" class="profile" />
                         </div>
                     </nav>
                     <nav class="sidebar">
@@ -181,7 +66,7 @@
                                 <!-- Start -->
                                 <!-- End -->
                                 <li class="item">
-                                    <a class="nav_link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
+                                    <a class="nav_link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'active' : '' }}"
                                         href="{{ route('admin.apartments.index') }}">
                                         <span class="navlink_icon">
                                             <i class="bx bx-loader-circle"></i>
@@ -193,7 +78,7 @@
                                 <!-- duplicate these li tag if you want to add or remove navlink only -->
                                 <!-- Start -->
                                 <li class="item">
-                                    <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
+                                    <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'active' : '' }}"
                                         href="{{ route('admin.messages.index') }}">
                                         <span class="navlink_icon">
                                             <i class="fa-solid fa-message"></i>
@@ -229,8 +114,8 @@
                         </div>
                     </nav>
                     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                        @yield('content')
-                    </main>
+                      @yield('content')
+                  </main>
                 </div>
             </div>
 
