@@ -27,52 +27,55 @@
 
 <body>
     <div id="app" class="vh-100">
-
-        <header style="height: 60px;" class="navbar fixed-top shadow flex-md-nowrap ms_nav p-2">
-            <div class="row justify-content-between">
-                <a class="navbar-brand text-white col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
-                <button class="navbar-toggler position-absolute d-md-none border-0 collapsed" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="navbar-nav">
-                <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link mx-3 text-white" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+        <header style="height: 60px;" class="fixed-top shadow-lg ms_nav">
+            <nav class="navbar navbar-expand-lg p-0 m-0">
+                <div class="container-fluid text-center justify-content-between">
+                    <a href="http://localhost:5173/">
+                        <img class="" src="{{ asset('img/bnbheader.png') }}" alt="">
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                    <button class="navbar-toggler d-md-none border-0 collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-nav">
+                        <div class="nav-item text-nowrap ms-2">
+                            <a class="nav-link mx-3" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </header>
-
         <div class="container-fluid" style="height: calc(100% - 60px); padding-top: 60px">
             <div class="row h-100 position-sticky">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar h-100 collapse position-fixed ms_nav" style="z-index: 999;">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar h-100 collapse position-fixed ms_nav"
+                    style="z-index: 999;">
                     <div class="pt-3">
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'text-black rounded' : 'text-white' }}"
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.dashboard') }}">
                                     <i class="fa-solid fa-chart-line"></i> Dashboard
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'text-black rounded' : 'text-white' }}"
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house"></i> Apartments
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'text-black rounded' : 'text-white' }}"
+                                <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.messages.index') }}">
                                     <i class="fa-solid fa-message"></i> Messages
                                     @php
@@ -81,21 +84,17 @@
                                         }
                                     @endphp
                                     @if ($count)
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {{$count}}
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ $count }}
                                             <span class="visually-hidden">Unread messages</span>
                                         </span>
                                     @endif
                                 </a>
                             </li>
-
-
                         </ul>
-
-
                     </div>
                 </nav>
-
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     @yield('content')
                 </main>
@@ -112,9 +111,16 @@
     :root {
         --primary-color: #24ADE3
     }
+    .nav-link {
+        color: white;
+    }
+    .nav-link:hover {
+        color: black;
+    }
     .ms_nav {
         background-color: var(--primary-color)
     }
+
     .navbar-toggler:focus {
         box-shadow: none
     }
