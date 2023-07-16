@@ -68,14 +68,21 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'text-black rounded' : '' }}"
+                                <a class="nav-link {{ Str::startsWith(Route::currentRouteName(), 'admin.apartments') ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house"></i> Apartments
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link position-relative {{ Route::currentRouteName() == 'admin.messages.index' ? 'text-black rounded' : '' }}"
+                                <a class="nav-link {{ Str::startsWith(Route::currentRouteName(), 'admin.sponsors') || Str::startsWith(Route::currentRouteName(), 'admin.payment') ? 'text-black rounded' : '' }}"
+                                    href="{{ route('admin.sponsors.index') }}">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i> Sponsors
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link position-relative {{ Str::startsWith(Route::currentRouteName(), 'admin.messages') ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.messages.index') }}">
                                     <i class="fa-solid fa-message"></i> Messages
                                     @php
