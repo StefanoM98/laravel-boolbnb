@@ -5,85 +5,76 @@
 <br>
 <br>
 <div class="container">
-    <div class="d-flex ">
-        <a class="btn btn-primary mt-5 " href="{{ route('admin.apartments.index') }}">Back to your
-            apartments</a>
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-primary mt-5 mb-3" href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
     </div>
     <div class="d-flex flex-row-reverse mb-2">
         @if ($apartment->sponsored == false)
-                <div>
-                    <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
-                        class="btn btn-success ms-3">
-                        Get sponsor
-                    </a>
-                </div>
-            @else
-                <span class="ms-3 fs-4 fw-bold text-success">
-                    SPONSORIZED
-                </span>
-            @endif
+            <div>
+                <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
+                    class="btn btn-success ms-3">
+                    Get sponsor
+                </a>
+            </div>
+        @else
+            <span class="ms-3 fs-4 mb-1 fw-bold text-success">
+                SPONSORIZED
+            </span>
+        @endif
     </div>
     <div class="d-flex flex-row-reverse">
         @if ($apartment->visibility == false)
-                <div>
-                    <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
-                        class="btn btn-success ms-3">
-                        Publish
-                    </a>
-                </div>
-            @else
-                <span class="ms-3 fs-4 fw-bold text-success">
-                    Published
-                </span>
-            @endif
-    </div>
-
-</div>
-    <div class="container">
-        <h1>{{ $apartment->name }}</h1>
-        <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} <i class="fa-solid fa-map-pin" style="color: #008799;"></i> </h3>
-        <div class="container-fluid">
-            <div class="tomtom">
-                <h3 class="mb-4">Map:</h3>
-                <div id="map" style="width: 100%; height: 300px"></div>
+            <div>
+                <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
+                    class="btn btn-success ms-3 mb-2">
+                    Publish
+                </a>
             </div>
-        </div>
-
+        @else
+            <span class="ms-3 fs-4 mb-2 fw-bold text-success">
+                Published
+            </span>
+        @endif
     </div>
+</div>
 
-    <div class="container mb-5">
-               {{-- <li>Description: {{ $apartment['description'] }}</li>
-        <li>Price: {{ $apartment['price'] }}€ per night</li>
-        <li>Square maters: {{ $apartment['square_meters'] }}</li>
-        <li>Bed number: {{ $apartment['bed_number'] }}</li>
-        <li>Bathroom number: {{ $apartment['bathroom_number'] }}</li>
-        <li>Room number: {{ $apartment['room_number'] }}</li>
-        <li> --}}
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-light"><span class="bold">Details</span></li>
-                <li class="list-group-item "><span class="bold">Description:</span> {{ $apartment['description'] }}</li>
-                <li class="list-group-item bg-light "><span class="bold">Price:</span> {{ $apartment['price'] }}€ per night</li>
-                <li class="list-group-item  " ><span class="bold">Square maters:</span> {{ $apartment['square_meters'] }}</li>
-                <li class="list-group-item bg-light "><span class="bold">Bed number:</span> {{ $apartment['bed_number'] }}</li>
-                <li class="list-group-item  " ><span class="bold">Bathroom number:</span> {{ $apartment['bathroom_number'] }}</li>
-                <li class="list-group-item bg-light "><span class="bold">Room number:</span> {{ $apartment['room_number'] }}</li>
-              
-            <span class="bold">Services:</span>
+<div class="container">
+    <h1>{{ $apartment->name }}</h1>
+    <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} <i
+            class="fa-solid fa-map-pin" style="color: #008799;"></i> </h3>
+    <div class="container-fluid">
+        <div class="tomtom">
+            <h3 class="mb-4">Map:</h3>
+            <div id="map" style="width: 100%; height: 300px"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-light"><span class="bold">Details</span></li>
+        <li class="list-group-item "><span class="bold">Description:</span> {{ $apartment['description'] }}</li>
+        <li class="list-group-item bg-light "><span class="bold">Price:</span> {{ $apartment['price'] }}€ per night</li>
+        <li class="list-group-item  "><span class="bold">Square meters:</span> {{ $apartment['square_meters'] }}</li>
+        <li class="list-group-item bg-light "><span class="bold">Bed number:</span> {{ $apartment['bed_number'] }}</li>
+        <li class="list-group-item  "><span class="bold">Bathroom number:</span> {{ $apartment['bathroom_number'] }}</li>
+        <li class="list-group-item bg-light "><span class="bold">Room number:</span> {{ $apartment['room_number'] }}</li>
+        <li class="list-group-item bg-light "><span class="bold">Services:</span>
             @forelse ($apartment->services as $service)
                 {{ $service->name }}{{ $loop->last ? '.' : ', ' }}
             @empty
             @endforelse
         </li>
     </ul>
-    </div>
-    <div class="container">
-        @if ($apartment->image)
-        <figure class="w-50">
-            <img class="w-50" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
+</div>
+<div class="container">
+    @if ($apartment->image)
+        <figure class="w-100">
+            <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
         </figure>
     @else
-        <figure class="w-50 m-0">
-            <img class="w-50 border" src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
+        <figure class="w-100 m-0">
+            <img class="img-fluid border" src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
         </figure>
     @endif
     <br>
@@ -94,7 +85,8 @@
             The announcement is online <i class="fa-solid fa-signal online" style="color: #00fb08;"></i>
         @endif
     </div>
-    </div>
+</div>
+
 
     <br>
 
