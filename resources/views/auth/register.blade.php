@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-     {{-- <div class="container mt-4">
+    {{-- <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -115,69 +115,74 @@
 
     <div class="d-flex justify-content-center mt-3 mb-5">
         <form class="form" method="POST" id="register-form" action="{{ route('register') }}">
-            
-                @csrf
+
+            @csrf
 
             <p class="title">Register </p>
             <p class="message">Signup now and get full access to our app. </p>
-                <div class="flex">
+            <div class="flex">
                 <label>
-                    <input id="name" type="text" class="input" name="name" value="{{ old('name') }}" autocomplete="" autofocus>
+                    <input id="name" type="text" class="input" name="name" value="{{ old('name') }}"
+                        autocomplete="" autofocus>
                     <span>{{ __('Name') }}</span>
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                </label>
-        
-                <label>
-                    <input id="surname" type="text" class="input" name="surname" value="{{ old('surname') }}" autofocus>
-                    <span>{{ __('Surname') }}</span>
-                        @error('surname')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                </label>
-            </div>  
-                    
-            <label>
-                <input id="surname" type="text" class="input" name="surname" value="{{ old('surname') }}" autofocus>
-                <span>{{ __('E-Mail Address*') }}</span>
-                    @error('email')
+                    @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                        <span id="correct-email" class="invalid-feedback" role="alert">
-                            <strong>Make sure the email is correct</strong>
+                </label>
+
+                <label>
+                    <input id="surname" type="text" class="input" name="surname" value="{{ old('surname') }}"
+                        autofocus>
+                    <span>{{ __('Surname') }}</span>
+                    @error('surname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
                         </span>
-            </label> 
+                    @enderror
+                </label>
+            </div>
             <label>
-                <input id="date_of_birth" type="date" class="input" name="date_of_birth" value="{{ old('date_of_birth') }}" autofocus>
+                <input id="date_of_birth" type="date" class="input" name="date_of_birth"
+                    value="{{ old('date_of_birth') }}" autofocus>
                 <span>{{ __('Date of birth') }}</span>
-                        @error('date_of_birth')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-            </label> 
-                
+                @error('date_of_birth')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </label>
+
             <label>
-                <input id="password" type="password" class="input" @error('password') is-invalid @enderror" name="password">
+                <input id="email" type="text" class="input" name="email" value="{{ old('email') }}" autofocus>
+                <span>{{ __('E-Mail Address*') }}</span>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <span id="correct-email" class="invalid-feedback" role="alert">
+                    <strong>Make sure the email is correct</strong>
+                </span>
+            </label>
+
+
+            <label>
+                <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password">
                 <span>{{ __('Password*') }}</span>
                 @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <span id="pwd-match1" class="invalid-feedback" role="alert">
+                    <strong>Passwords doesn't match</strong>
                 </span>
-            @enderror
-            <span id="pwd-match1" class="invalid-feedback" role="alert">
-                <strong>Passwords doesn't match</strong>
-            </span>
             </label>
             <label>
-                <input id="password-confirm" type="password" class="input @error('password') is-invalid @enderror" name="password_confirmation">
+                <input id="password-confirm" type="password" class="input @error('password') is-invalid @enderror"
+                    name="password_confirmation">
                 <span>{{ __('Confirm Password*') }}</span>
                 <span id="pwd-match" class="invalid-feedback" role="alert">
                     <strong>Passwords doesn't match</strong>
@@ -200,7 +205,7 @@
         // Gestione btn submit enabled/disabled
         const btn = document.getElementById('btn-submit');
 
-        confPassword.addEventListener('input', function () {
+        confPassword.addEventListener('input', function() {
             let pwd = password.value;
             let confPwd = confPassword.value;
             console.log(pwd.length >= 8, confPwd.length >= 8);
@@ -227,7 +232,7 @@
         // Script per vedere se la mail è stata inserita correttamente
         const mail = document.getElementById('email');
         const emailMatch = document.getElementById('correct-email');
-        mail.addEventListener('input', function () {
+        mail.addEventListener('input', function() {
             let my_email = mail.value;
             if (my_email.includes('@')) {
                 mail.classList.remove('is-invalid');
@@ -241,136 +246,143 @@
         });
     </script>
 
-<style>
+    <style>
         .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 350px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 20px;
-  border: 2px solid rgb(8, 236, 244);
-  box-shadow: 0 15px 20px -3px rgba(1, 1, 1, 0.1), 0 4px 6px -2px rgba(5, 5, 5, 0.05);
-  position: relative;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid rgb(8, 236, 244);
+            box-shadow: 0 15px 20px -3px rgba(1, 1, 1, 0.1), 0 4px 6px -2px rgba(5, 5, 5, 0.05);
+            position: relative;
+        }
 
-.title {
-  font-size: 28px;
-  color: rgb(8, 236, 244);;
-  font-weight: 600;
-  letter-spacing: -1px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 30px;
-}
+        .title {
+            font-size: 28px;
+            color: rgb(8, 236, 244);
+            ;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
 
-.title::before,.title::after {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: rgb(8, 236, 244);;
-}
+        .title::before,
+        .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: rgb(8, 236, 244);
+            ;
+        }
 
-.title::before {
-  width: 18px;
-  height: 18px;
-  background-color: rgb(8, 236, 244);;
-}
+        .title::before {
+            width: 18px;
+            height: 18px;
+            background-color: rgb(8, 236, 244);
+            ;
+        }
 
-.title::after {
-  width: 18px;
-  height: 18px;
-  animation: pulse 1s linear infinite;
-}
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
 
-.message, .signin {
-  color: rgba(88, 87, 87, 0.822);
-  font-size: 14px;
-}
+        .message,
+        .signin {
+            color: rgba(88, 87, 87, 0.822);
+            font-size: 14px;
+        }
 
-.signin {
-  text-align: center;
-}
+        .signin {
+            text-align: center;
+        }
 
-.signin a {
-  color: royalblue;
-}
+        .signin a {
+            color: royalblue;
+        }
 
-.signin a:hover {
-  text-decoration: underline royalblue;
-}
+        .signin a:hover {
+            text-decoration: underline royalblue;
+        }
 
-.flex {
-  display: flex;
-  width: 100%;
-  gap: 6px;
-}
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
 
-.form label {
-  position: relative;
-}
+        .form label {
+            position: relative;
+        }
 
-.form label .input {
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  outline: 0;
-  border: 1px solid rgba(105, 105, 105, 0.397);
-  border-radius: 10px;
-}
+        .form label .input {
+            width: 100%;
+            padding: 10px 10px 20px 10px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 10px;
+        }
 
-.form label .input + span {
-  position: absolute;
-  left: 10px;
-  top: 15px;
-  color: grey;
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
+        .form label .input+span {
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: grey;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
 
-.form label .input:placeholder-shown + span {
-  top: 15px;
-  font-size: 0.9em;
-}
+        .form label .input:placeholder-shown+span {
+            top: 15px;
+            font-size: 0.9em;
+        }
 
-.form label .input:focus + span,.form label .input:valid + span {
-  top: 30px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
+        .form label .input:focus+span,
+        .form label .input:valid+span {
+            top: 30px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
 
 
 
-.submit {
-  border: none;
-  outline: none;
-  background-color: rgb(8, 236, 244);;
-  padding: 10px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  transform: .3s ease;
-}
+        .submit {
+            border: none;
+            outline: none;
+            background-color: rgb(8, 236, 244);
+            ;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transform: .3s ease;
+        }
 
-.submit:hover {
-  background-color: rgb(8, 125, 145);
-}
+        .submit:hover {
+            background-color: rgb(8, 125, 145);
+        }
 
-@keyframes pulse {
-  from {
-    transform: scale(0.9);
-    opacity: 1;
-  }
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
 
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-</style>
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
 @endsection

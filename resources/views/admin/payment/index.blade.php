@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <section id="payment" class="container my-5">
+    <section id="payment" class="container payment">
         <div class="row">
             <div class="col position-relative">
                 <div id="isSent" class="text-bg-success message success d-none align-items-center justify-content-center">
@@ -32,7 +32,7 @@
             <div>
                 <button id="submit-button" class="btn btn-primary">Buy</button>
             </div>
-            
+
             <div class="d-flex justify-content-end">
                 <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary">
                     Go back to sponsor's page
@@ -83,7 +83,8 @@
                                     'd-none');
                             }, 3000);
                             setTimeout(function() {
-                                window.location.replace('/admin/apartments/' + slug);
+                                window.location.replace('/admin/apartments/' +
+                                    slug);
                             }, 5000);
 
                             // window.location.replace('{{ route('admin.sponsors.index') }}'); 
@@ -105,4 +106,10 @@
             });
         });
     </script>
+
+    <style>
+        .payment {
+            margin-top: 20rem
+        }
+    </style>
 @endsection
