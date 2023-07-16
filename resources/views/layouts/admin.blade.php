@@ -27,10 +27,10 @@
 <body>
     <div id="app" class="vh-100">
 
-        <header style="height: 60px;" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-2">
+        <header style="height: 60px;" class="navbar fixed-top flex-md-nowrap ms_nav p-2">
             <div class="row justify-content-between">
                 <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">BoolBnB</a>
-                <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
+                <button class="navbar-toggler position-absolute d-md-none border-0 collapsed" type="button"
                     data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,9 +52,7 @@
 
         <div class="container-fluid" style="height: calc(100% - 60px); padding-top: 60px">
             <div class="row h-100 position-sticky">
-
-
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse h-100 position-fixed" style="z-index: 999;">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse h-100 position-fixed ms_nav" style="z-index: 999;">
                     <div class="pt-3">
                         <ul class="nav flex-column">
 
@@ -84,7 +82,7 @@
                                     @if ($count)
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             {{$count}}
-                                            <span class="visually-hidden">unread messages</span>
+                                            <span class="visually-hidden">Unread messages</span>
                                         </span>
                                     @endif
                                 </a>
@@ -108,3 +106,13 @@
 </body>
 
 </html>
+
+<style lang="scss" scoped>
+@import 'variables';
+    .ms_nav {
+        background-color: $dark_accent_color
+    }
+    .navbar-toggler:focus {
+        box-shadow: none
+    }
+</style>
