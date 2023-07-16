@@ -54,7 +54,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right ms_nav" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Dashboard') }}</a>
+                                    <a class="dropdown-item border-bottom border-secondary" style="--bs-border-opacity: .5;" href="{{ url('admin') }}">{{ __('Dashboard') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
