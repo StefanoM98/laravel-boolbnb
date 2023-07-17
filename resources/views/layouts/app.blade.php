@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/png" href="/img/Logo.png">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -22,7 +22,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md ms_nav shadow-sm">
+        <nav class="navbar navbar-expand-lg ms_nav shadow-sm">
             <div class="container">
                 <a href="http://localhost:5173/" style="height: 60px">
                     <img class="logo" src="{{ asset('img/bnbheader.png') }}" alt="">

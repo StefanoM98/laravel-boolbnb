@@ -3,7 +3,7 @@
     <div class="jumbotron mb-4 rounded-3">
         <div class="container my-5">
             <div class="d-flex justify-content-center mb-5">
-                <img src="{{ asset('img/bnb.png') }}" alt="">
+                <img class="welcome_img" src="{{ asset('img/bnb.png') }}" alt="">
             </div>
             <h1 class="display-5 fw-bold text-center">
                 Welcome to Booking Apartments
@@ -20,7 +20,7 @@
 
 
     <style>
-        img {
+        .welcome_img {
             width: 250px;
         }
     </style>

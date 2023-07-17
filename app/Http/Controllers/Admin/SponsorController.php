@@ -47,7 +47,6 @@ class SponsorController extends Controller
                     $query->where('end_date', '>', $today)
                         ->orWhereNull('end_date');
                 })->get();
-
             return view('admin.sponsors.show', compact('apartments', 'sponsor'));
         } else {
 
