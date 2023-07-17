@@ -4,10 +4,6 @@
 
 @section('content')
 
-    <div class="container pt-5">
-        @include('partials.session_message')
-    </div>
-
     <section id="sponsors_list" class="container py-5">
         <h3 class="my-5 ms_color">Choose the sponsorship you prefer:</h3>
 

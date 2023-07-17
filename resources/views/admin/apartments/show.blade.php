@@ -1,58 +1,56 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="d-flex ">
-        <a class="btn btn_n my-4 " href="{{ route('admin.apartments.index') }}">Back to your
-            apartments</a>
-    </div>
-    <div class="d-flex flex-row-reverse">
-        @if ($apartment->sponsored == false)
+    <div class="container my-4">
+        <a class="btn btn_n my-4 " href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
+        <div class="d-flex justify-content-between">
+            @if ($apartment->sponsored == false)
                 <div>
-                    <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}"
-                        class="btn btn-success ms-3">
+                    <a href="{{ route('admin.sponsors.index', ['apartment_id' => $apartment->id]) }}" class="btn btn-success">
                         Get sponsor
                     </a>
                 </div>
             @else
-                <span class="ms-3 fs-4 fw-bold text-success">
+                <span class="fs-4 fw-bold text-success">
                     SPONSORIZED
                 </span>
             @endif
-    </div>
-    <div class="d-flex flex-row-reverse">
-        @if ($apartment->visibility == false)
-                <div>
-                    <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
-                        class="btn btn-success ms-3">
-                        Publish
-                    </a>
-                </div>
-            @else
-                <span class="ms-3 fs-4 fw-bold text-success">
-                    Published
-                </span>
-            @endif
-    </div>
-    <div class="container">
+            <div class="ms-auto">
+                @if ($apartment->visibility == false)
+                    <div>
+                        <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn btn-success">
+                            Publish
+                        </a>
+                    </div>
+                @else
+                    <span class="fs-4 fw-bold text-success">
+                        Published
+                    </span>
+                @endif
+            </div>
+        </div>
         <h1>{{ $apartment->name }}</h1>
         <h3>{{ $apartment->city }}, {{ $apartment->address }}, {{ $apartment->state }} </h3>
-    </div>
-
-
-    <div class="tomtom container">
-        <h3 class="mb-4">Map <i class="fa-solid fa-map-location-dot" style="color: #24ADE3;"></i> :</h3>
-        <div id="map" style="width: 100%; height: 500px"></div>
-    </div>
-    <div class="container mt-5 mb-2 ">
-        <ul class="list-group list-group-flush" >
+        @if ($apartment->image)
+            <div class="col-12 col-md-8">
+                <img class="ms_app_img rounded shadow" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
+            </div>
+        @else
+            <img class="ms_app_img rounded shadow" src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
+        @endif
+        <ul class="list-group my-5 list-group-flush">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><span class="boldser">Description:</span>{{ $apartment['description'] }}</li>
-                <li class="list-group-item bg-light"><span class="boldser" >Price:</span>{{ $apartment['price'] }}€ per night</li>
-                <li class="list-group-item "><span class="boldser" >Square maters:</span>{{ $apartment['square_meters'] }}</li>
-                <li class="list-group-item bg-light"><span class="boldser" >Bed number:</span>{{ $apartment['bathroom_number'] }}</li>
-                <li class="list-group-item "><span class="boldser" >Room number:</span>{{ $apartment['room_number'] }}</li>
-              </ul>
-            <li class="list-group-item bg-light " >
+                <li class="list-group-item bg-light"><span class="boldser">Price:</span>{{ $apartment['price'] }}€ per
+                    night
+                </li>
+                <li class="list-group-item"><span class="boldser">Square maters:</span>{{ $apartment['square_meters'] }}
+                </li>
+                <li class="list-group-item bg-light"><span class="boldser">Bed number:</span>{{ $apartment['bathroom_number'] }}</li>
+                <li class="list-group-item"><span class="boldser">Room number:</span>{{ $apartment['room_number'] }}</li>
+                <li class="list-group-item bg-light"><span class="boldser">Bathroom number:</span>{{ $apartment['bathroom_number'] }}</li>
+            </ul>
+            <li class="list-group-item">
                 <span class="boldser">Services:</span>
                 @forelse ($apartment->services as $service)
                     {{ $service->name }}{{ $loop->last ? '.' : ', ' }}
@@ -60,28 +58,13 @@
                 @endforelse
             </li>
         </ul>
-    </div>
-<div class="container mt-5">
-    @if ($apartment->image)
-        <figure class="w-50">
-            <img class="" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
-        </figure>
-    @else
-        <figure class="w-50 m-0">
-            <img class=" " src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
-        </figure>
-    @endif
-    <br>
-    <div class="mb-3 ">
-        @if (!$apartment->visibility)
-            The announcement is ready to be published
-        @else
-            The announcement is online
-        @endif
-    </div>
-</div>
 
-    <br>
+        <div class="tomtom container">
+            <h3 class="mb-4">Map <i class="fa-solid fa-map-location-dot" style="color: #24ADE3;"></i> :</h3>
+            <div id="map" style="width: 100%; height: 300px"></div>
+        </div>
+    </div>
+
 
     <script>
         let center = [{{ $apartment->longitude }}, {{ $apartment->latitude }}];
@@ -99,24 +82,27 @@
         })
     </script>
 
-<style lang="scss" scoped> 
-.boldser{
-    font-weight: 700;
-}
+    <style lang="scss" scoped>
+        .boldser {
+            font-weight: 700;
+        }
 
-#map{
-    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.5);
-}
+        #map {
+            box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.5);
+        }
 
-.btn_n{
+        .ms_app_img {
+            width: 100%;
+        }
+
+        .btn_n {
             background: #24ADE3;
             color: white;
 
         }
-        .btn:hover{
+
+        .btn:hover {
             background: #1e92bf;
         }
-
-</style>
-
+    </style>
 @endsection
