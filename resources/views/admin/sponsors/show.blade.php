@@ -130,7 +130,7 @@
                         <div class="my-apartment-card">
                             <h2 class="text-center px-2">{{ $apartment->name }}</h2>
                             <div class="px-5">
-                                <img class="img-fluid rounded" src="{{ asset('storage/' . $apartment->image) }}">
+                                <img class="img-fluid rounded" src="{{ $apartment->getImageUri() }}">
                             </div>
 
                             {{-- Rotta payment --}}
