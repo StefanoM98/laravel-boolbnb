@@ -77,13 +77,14 @@
 
     <style lang="scss" scoped>
         .btn_n {
-            background: #24ADE3;
+            background: var(--primary-color);
             color: white;
-
         }
 
         .btn:hover {
-            background: #1e92bf
+            background-color: var(--primary-color);
+            color: black;
+            border-color: var(--primary-color)
         }
 
         :root {

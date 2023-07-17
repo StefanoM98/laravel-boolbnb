@@ -5,15 +5,15 @@
 @section('content')
 
     <section id="sponsors_list" class="container py-5">
-        <h3 class="my-5 ms_color">Choose the sponsorship you prefer:</h3>
+        <h3 class="my-5 ms_color">Choose the sponsorship plan:</h3>
 
         <div class="row">
             @forelse($sponsors as $sponsor)
                 <div class="col-md-12 col-xxl-4 mb-4">
                     <a href="{{ route('admin.sponsors.show', [$sponsor->id, 'apartment_id' => $apartment_id]) }}">
-                        <div class="my-sponsor-card @if ($sponsor->name == 'Bronze') bronze @elseif ($sponsor->name == 'Gold') gold @elseif ($sponsor->name == 'Platinum') platinum @endif">
-                            <div
-                                class="my-card-header d-flex align-items-center justify-content-between p-3 ">
+                        <div
+                            class="my-sponsor-card @if ($sponsor->name == 'Bronze') bronze @elseif ($sponsor->name == 'Gold') gold @elseif ($sponsor->name == 'Platinum') platinum @endif">
+                            <div class="my-card-header d-flex align-items-center justify-content-between p-3 ">
                                 <h4>
                                     {{ $sponsor->name }}</h4>
 
@@ -47,10 +47,22 @@
         --bronze-color: #543902;
         --gold-color: #d4af37;
         --plat-color: #737373;
+        --primary-color: #24ADE3;
     }
 
     .ms_color {
         color: var(--primary-color)
+    }
+
+    .btn_color {
+        background-color: var(--primary-color);
+        color: white;
+        border: var(--primary-color)
+    }
+
+    .btn:hover {
+        background-color: #1b85ae;
+        color: black
     }
 
     .bronze {
@@ -75,7 +87,7 @@
     .my-sponsor-card {
         display: flex;
         flex-direction: column;
-        background-color:  #d7dade;
+        background-color: #d7dade;
         min-height: 40px;
         border-radius: 10px;
         cursor: pointer;
@@ -102,7 +114,7 @@
     }
 
     .my-apartment-card {
-        background-color:  #3A4A64;
+        background-color: #3A4A64;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         width: 100%;
@@ -111,11 +123,11 @@
 
     #sponsor-pay .th {
         color: $primary;
-        background-color:  #3A4A64;
+        background-color: #3A4A64;
     }
 
     #sponsor-pay .td {
         color: $text;
-        background-color:  #3A4A64;
+        background-color: #3A4A64;
     }
 </style>

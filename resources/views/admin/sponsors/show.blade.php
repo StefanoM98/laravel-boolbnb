@@ -18,7 +18,8 @@
                 @if (isset($apartments))
                     @if (count($apartments) > 0)
                         <div class="col-xs-12 col-xl-4 d-flex align-items-start justify-content-center">
-                            <div class="my-sponsor-card @if ($sponsor->name == 'Bronze') bronze @elseif ($sponsor->name == 'Gold') gold @elseif ($sponsor->name == 'Platinum') platinum @endif">
+                            <div
+                                class="my-sponsor-card @if ($sponsor->name == 'Bronze') bronze @elseif ($sponsor->name == 'Gold') gold @elseif ($sponsor->name == 'Platinum') platinum @endif">
                                 <div class="my-card-header d-flex align-items-center justify-content-between p-3">
                                     <h4>
                                         {{ $sponsor->name }}</h4>
@@ -65,8 +66,8 @@
                                         <tr>
                                             <td class="d-none d-md-table-cell align-middle text-center">
                                                 <div class="my-image-container">
-                                                    <img src="{{ $apartment->getImageUri() }}"
-                                                        alt=" {{ $apartment->name }}" class="img-fluid rounded">
+                                                    <img src="{{ $apartment->getImageUri() }}" alt=" {{ $apartment->name }}"
+                                                        class="img-fluid rounded">
                                                 </div>
                                             </td>
                                             <td class="align-middle">
@@ -78,8 +79,8 @@
                                             <td class="align-middle text-center">
                                                 {{-- QUI REINDIRIZZEREI ALLA STESSA route() CHE GESTISCE IL PAGAMENTO NEL CASO DELL'APPARTAMENTO RICEVUTO --}}
                                                 <a href="{{ route('admin.payment.clientToken', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
-                                                    class="btn btn-warning">
-                                                    Paga
+                                                    class="btn btn_color">
+                                                    Pay
                                                 </a>
                                             </td>
                                         </tr>
@@ -149,80 +150,92 @@
 
     </section>
 
+    <style lang="scss" scoped>
+        :root {
+            --bronze-color: #543902;
+            --gold-color: #d4af37;
+            --plat-color: #737373;
+            --primary-color: #24ADE3;
+        }
+    
+        .ms_color {
+            color: var(--primary-color)
+        }
+    
+        .btn_color {
+            background-color: var(--primary-color);
+            color: white
+        }
+    
+        .btn:hover {
+            background-color: #1b85ae;
+            color: black
+        }
+    
+        .bronze {
+            color: var(--bronze-color);
+            box-shadow: 0 0 8px 0 var(--bronze-color), 0 0 20px 0 var(--bronze-color);
+        }
+    
+        .gold {
+            color: var(--gold-color);
+            box-shadow: 0 0 8px 0 var(--gold-color), 0 0 20px 0 var(--gold-color);
+        }
+    
+        .platinum {
+            color: var(--plat-color);
+            box-shadow: 0 0 8px 0 var(--plat-color), 0 0 20px 0 var(--plat-color);
+        }
+    
+        .sponsor-show-card {
+            max-height: 500px;
+        }
+    
+        .my-sponsor-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #d7dade;
+            min-height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 1s;
+            margin: 1rem 0 1rem 0;
+        }
+    
+        .my-card-header {
+            font-family: 'Roboto', sans-serif;
+        }
+    
+        .my-card-body {
+            padding: 2rem;
+        }
+    
+        #sponsors_list .my-sponsor-card:hover {
+            transform: scale(1.05);
+        }
+    
+    
+        .table.rounded .my-image-container {
+            width: 30%;
+            margin: 0 auto;
+        }
+    
+        .my-apartment-card {
+            background-color: #3A4A64;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            width: 100%;
+            text-align: center;
+        }
+    
+        #sponsor-pay .th {
+            color: $primary;
+            background-color: #3A4A64;
+        }
+    
+        #sponsor-pay .td {
+            color: $text;
+            background-color: #3A4A64;
+        }
+    </style>
 @endsection
-<style lang="scss" scoped>
-    :root {
-        --bronze-color: #543902;
-        --gold-color: #d4af37;
-        --plat-color: #737373;
-    }
-    .ms_color {
-        color: var(--primary-color)
-    }
-
-    .bronze {
-        color: var(--bronze-color);
-        box-shadow: 0 0 8px 0 var(--bronze-color), 0 0 20px 0 var(--bronze-color);
-    }
-
-    .gold {
-        color: var(--gold-color);
-        box-shadow: 0 0 8px 0 var(--gold-color), 0 0 20px 0 var(--gold-color);
-    }
-
-    .platinum {
-        color: var(--plat-color);
-        box-shadow: 0 0 8px 0 var(--plat-color), 0 0 20px 0 var(--plat-color);
-    }
-
-    .sponsor-show-card {
-        max-height: 500px;
-    }
-
-    .my-sponsor-card {
-        display: flex;
-        flex-direction: column;
-        background-color:  #d7dade;
-        min-height: 40px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 1s;
-        margin: 1rem 0 1rem 0;
-    }
-
-    .my-card-header {
-        font-family: 'Roboto', sans-serif;
-    }
-
-    .my-card-body {
-        padding: 2rem;
-    }
-
-    #sponsors_list .my-sponsor-card:hover {
-        transform: scale(1.05);
-    }
-
-
-    .table.rounded .my-image-container {
-        width: 30%;
-        margin: 0 auto;
-    }
-
-    .my-apartment-card {
-        background-color:  #3A4A64;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        width: 100%;
-        text-align: center;
-    }
-
-    #sponsor-pay .th {
-        color: $primary;
-        background-color:  #3A4A64;
-    }
-
-    #sponsor-pay .td {
-        color: $text;
-        background-color:  #3A4A64;
-    }
-</style>

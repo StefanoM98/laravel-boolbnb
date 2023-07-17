@@ -168,7 +168,7 @@ class ApartmentController extends Controller
         $data['longitude'] = $longitude;
 
         $apartment->update($data);
-        return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', "L'appartamento" . $apartment->name . "è stato modificato con successo");
+        return redirect()->route('admin.apartments.show', compact('apartment', 'services'))->with('message', $apartment->name . "has been updated succesfully");
     }
 
     /**
@@ -187,6 +187,6 @@ class ApartmentController extends Controller
 
         $apartment->delete();
 
-        return redirect()->route('admin.apartments.index');
+        return redirect()->route('admin.apartments.index')->with('message', $apartment->name . " has been deleted succesfully");
     }
 }

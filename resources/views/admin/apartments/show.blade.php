@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container my-4">
-        <a class="btn btn_n my-4 " href="{{ route('admin.apartments.index') }}">Back to your apartments</a>
+        @include('partials.session_message')
         <div class="d-flex justify-content-between">
             @if ($apartment->sponsored == false)
                 <div>
