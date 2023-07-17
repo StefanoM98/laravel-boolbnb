@@ -66,21 +66,21 @@
                                     <i class="fa-solid fa-chart-line"></i> Dashboard
                                 </a>
                             </li>
-
+                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link {{ Str::startsWith(Route::currentRouteName(), 'admin.apartments') ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-house"></i> Apartments
                                 </a>
                             </li>
-
+<hr>
                             <li class="nav-item">
                                 <a class="nav-link {{ Str::startsWith(Route::currentRouteName(), 'admin.sponsors') || Str::startsWith(Route::currentRouteName(), 'admin.payment') ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.sponsors.index') }}">
                                     <i class="fa-solid fa-hand-holding-dollar"></i> Sponsors
                                 </a>
                             </li>
-
+<hr>
                             <li class="nav-item">
                                 <a class="nav-link position-relative {{ Str::startsWith(Route::currentRouteName(), 'admin.messages') ? 'text-black rounded' : '' }}"
                                     href="{{ route('admin.messages.index') }}">

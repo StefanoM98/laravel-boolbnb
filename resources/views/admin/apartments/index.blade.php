@@ -2,20 +2,21 @@
 
 @section('content')
     @include('partials.session_message')
-    <h1 class="text-center mt-2 text-danger"> My Apartments list</h1>
-    <div class="text-center m-4">
-        <a class="btn btn-success text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+    <h1 class=" mt-2 myapp"> My Apartments list</h1>
+    <br>
+    <div class=" m-4">
+        <a class="btnn  text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
     </div>
-
+<br>
     @if ($apartments->count() > 0)
         <table class="table align-middle">
             <thead class="text-danger">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col szcol">Name</th>
+                    <th scope="col szcol ">City</th>
+                    <th scope="col szcol ">Address</th>
+                    <th scope="col szcol ">Price</th>
+                    <th scope="col szcol ">Actions</th>
                 </tr>
             </thead>
 
@@ -68,4 +69,23 @@
             return confirm('Are you sure you want to delete this Project?');
         }
     </script> --}}
+
+    <style lang="scss" scoped>
+        .myapp{
+            font-size: 50px;
+            font: 800;
+        }
+
+        .btnn{
+            background: #24ADE3;
+            color: white;
+            padding: 17px;
+            border-radius: 10px;
+        }
+        
+        .szcol{
+            font-size: 30px;
+        }
+
+    </style>
 @endsection
