@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container pt-3">
-        <h1>Messages</h1>
+        <h1 class="p_color">Messages</h1>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -41,4 +41,14 @@
             </table>
         </div>
     </div>
+
+    <style lang="scss" scoped >
+                :root {
+        --primary-color: #24ADE3
+    }
+
+    .p_color {
+        color: var(--primary-color)
+    }
+    </style>
 @endsection
