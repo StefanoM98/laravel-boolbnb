@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex ">
-        <a class="btn btn-primary my-4 " href="{{ route('admin.apartments.index') }}">Back to your
+        <a class="btn btn_n my-4 " href="{{ route('admin.apartments.index') }}">Back to your
             apartments</a>
     </div>
     <div class="d-flex flex-row-reverse">
@@ -64,11 +64,11 @@
 <div class="container mt-5">
     @if ($apartment->image)
         <figure class="w-50">
-            <img class="w-50" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
+            <img class="" src="{{ asset('storage/' . $apartment->image) }}" alt="immagine">
         </figure>
     @else
         <figure class="w-50 m-0">
-            <img class="w-50 border" src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
+            <img class=" " src="{{ asset('img/Image_not_available.png') }}" alt="immagine">
         </figure>
     @endif
     <br>
@@ -107,6 +107,15 @@
 #map{
     box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.5);
 }
+
+.btn_n{
+            background: #24ADE3;
+            color: white;
+
+        }
+        .btn:hover{
+            background: #1e92bf;
+        }
 
 </style>
 

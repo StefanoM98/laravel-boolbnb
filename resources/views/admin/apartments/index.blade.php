@@ -2,21 +2,20 @@
 
 @section('content')
     @include('partials.session_message')
-    <h1 class=" mt-2 myapp"> My Apartments list</h1>
-    <br>
-    <div class=" m-4">
-        <a class="btnn  text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+    <h1 class=" my-3  p_color"> My Apartments list</h1>
+
+    <div class="my-4">
+        <a class="btn btn_n my-4  text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
     </div>
-<br>
     @if ($apartments->count() > 0)
         <table class="table align-middle">
             <thead class="text-danger">
                 <tr>
-                    <th scope="col szcol">Name</th>
-                    <th scope="col szcol ">City</th>
-                    <th scope="col szcol ">Address</th>
-                    <th scope="col szcol ">Price</th>
-                    <th scope="col szcol ">Actions</th>
+                    <th scope="col ">Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
 
@@ -71,21 +70,23 @@
     </script> --}}
 
     <style lang="scss" scoped>
-        .myapp{
-            font-size: 50px;
-            font: 800;
-        }
 
-        .btnn{
+        .btn_n{
             background: #24ADE3;
             color: white;
-            padding: 17px;
-            border-radius: 10px;
+
         }
-        
-        .szcol{
-            font-size: 30px;
+        .btn:hover{
+            background: #1e92bf
         }
+
+        :root {
+        --primary-color: #24ADE3
+    }
+
+    .p_color {
+        color: var(--primary-color)
+    }
 
     </style>
 @endsection
