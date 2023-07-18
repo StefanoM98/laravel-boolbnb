@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('page-name', 'Pagamento')
+@section('page-name')
+Payment
+@endsection
 
 @section('head')
     {{-- BRAINTREE --}}
@@ -16,11 +18,11 @@
     <section id="payment" class="container my-5">
         <div class="row">
             <div class="col position-relative">
-                <div id="isSent" class="text-bg-success message success d-none align-items-center justify-content-center">
+                <div id="isSent" class="text-bg-success message p-3 d-none success align-items-center justify-content-center">
                     <i class="fa-solid fa-circle-check fa-fade"></i>
                     <span class="ms-2 me-4">Payment done! <br> You will be redirected to the apartment's page...</span>
                 </div>
-                <div id="isSentNone" class="text-bg-danger message danger d-none align-items-center justify-content-center">
+                <div id="isSentNone" class="text-bg-danger message p-3 d-none danger align-items-center justify-content-center">
                     <i class="fa-solid fa-circle-check fa-fade"></i>
                     <span class="ms-2 me-4">Payment rejected!</span>
                 </div>
@@ -30,16 +32,48 @@
         <div id="dropin-container"></div>
         <div class="d-flex justify-content-between">
             <div>
-                <button id="submit-button" class="btn btn-primary">Buy</button>
+                <button id="submit-button" class="btn btn_color">Buy</button>
             </div>
             
             <div class="d-flex justify-content-end">
-                <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary">
+                <a href="{{ route('admin.sponsors.index') }}" class="btn btn_color">
                     Go back to sponsor's page
                 </a>
             </div>
         </div>
     </section>
+    <style lang="scss" scoped>
+        :root {
+            --primary-color: #24ADE3
+        }
+
+        .p_color {
+            color: var(--primary-color)
+        }
+
+        .btn_color {
+            background-color: var(--primary-color);
+            color: white
+        }
+
+        .btn:hover {
+            background-color: rgb(27, 133, 174);
+            color: black
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-control:focus {
+            color: var(--primary-color);
+            background-color: var(--bs-body-bg);
+            border-color: var(--primary-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(27, 133, 174, 0.25);
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -81,10 +115,10 @@
                             setTimeout(function() {
                                 $('#isSent').removeClass('d-flex').addClass(
                                     'd-none');
-                            }, 3000);
+                            }, 3500);
                             setTimeout(function() {
                                 window.location.replace('/admin/apartments/' + slug);
-                            }, 5000);
+                            }, 4000);
 
                             // window.location.replace('{{ route('admin.sponsors.index') }}'); 
                             // alert('Pagamento avvenuto con successo!');

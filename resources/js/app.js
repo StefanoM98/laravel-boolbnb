@@ -5,6 +5,16 @@ import.meta.glob([
     '../img/**'
 ])
 
+document.addEventListener("DOMContentLoaded", function() {
+    const confirmMessage = document.getElementById("ms_message")
+    console.log(confirmMessage);
+    if (confirmMessage) {
+        setTimeout(function() {
+            confirmMessage.classList.add("d-none")
+        }, 4000);
+    }
+})
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

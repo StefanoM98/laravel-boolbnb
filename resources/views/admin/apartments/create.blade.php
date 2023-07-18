@@ -1,198 +1,212 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Create ADS
+@endsection
 @section('content')
-    <div class="container">
-        <div class="row row-col-4">
-            <div class="col-md-8 offset-md-2">
-                <div class="card my-3">
-                    <div class="card-header">
-                        Create Apartment
-                    </div>
-                    <div class="card-body">
+    <div class="background">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card my-3">
+                        <div class="card-header">
+                            Create Apartment
+                        </div>
+                        <div class="card-body">
 
-                        <form id="form-e" action="{{ route('admin.apartments.store') }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
+                            <form id="form-e" action="{{ route('admin.apartments.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
 
-                            <div class="form-group  mb-3">
-                                <label for="name">Name*</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name') }}">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="square_meters">Square Meters*</label>
-                                <input type="number" class="form-control @error('square_meters') is-invalid @enderror"
-                                    id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
-                                @error('square_meters')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="bed_number">Number of Beds*</label>
-                                <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
-                                    id="bed_number" name="bed_number" value="{{ old('bed_number') }}">
-                                @error('bed_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="bathroom_number">Number of Bathrooms*</label>
-                                <input type="number" class="form-control @error('bathroom_number') is-invalid @enderror"
-                                    id="bathroom_number" name="bathroom_number" value="{{ old('bathroom_number') }}">
-                                @error('bathroom_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="room_number">Number of Rooms*</label>
-                                <input type="number" class="form-control @error('room_number') is-invalid @enderror"
-                                    id="room_number" name="room_number" value="{{ old('room_number') }}">
-                                @error('room_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Services*</label>
-
-                                <div class="border rounded p-3">
-                                    @foreach ($services as $item)
-                                        <div class="form-check">
-                                            <input class="form-check-input @error('services') is-invalid @enderror"
-                                                type="checkbox" name="services[]" value="{{ $item->id }}"
-                                                id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
-                                            <label class="form-check-label" for="services-{{ $item->id }}">
-                                                {{ $item->name }}
-                                            </label>
-                                        </div>
-                                    @endforeach
+                                <div class="form-group  mb-3">
+                                    <label for="name">Name*</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        id="name" name="name" value="{{ old('name') }}" autocomplete="off">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('services')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group position-relative mb-3">
-                                <label for="address">Address*</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    id="address" name="address" value="{{ old('address') }}" autocomplete="off"
-                                    placeholder="Street, House Number, Postal Code, City">
-                                {{-- creazione lista suggerimento indirizzo --}}
-                                <div id="hidden_list" class="card position-absolute w-100 radius d-none">
-                                    <ul class="list-group">
-
-                                    </ul>
+                                <div class="form-group mb-3">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                                 </div>
-                                @error('address')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group  mb-3">
-                                <label for="city">City*</label>
-                                <input type="text" class="form-control @error('city') is-invalid @enderror"
-                                    id="city" name="city" value="{{ old('city') }}">
-                                @error('city')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6 mb-3">
+                                        <label for="square_meters">Square Meters*</label>
+                                        <input type="number" min="0"
+                                            class="form-control @error('square_meters') is-invalid @enderror"
+                                            id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
+                                        @error('square_meters')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
 
-                            <div class="form-group  mb-3">
-                                <label for="state">State*</label>
-                                <input type="text" class="form-control @error('state') is-invalid @enderror"
-                                    id="state" name="state" value="{{ old('state') }}">
-                                @error('state')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group d-none mb-3">
-                                <label for="latitude">Latitude</label>
-                                <input type="text" class="form-control" id="latitude" name="latitude"
-                                    value="{{ old('latitude') }}">
-                            </div>
-
-                            <div class="form-group d-none mb-3">
-                                <label for="longitude">Longitude</label>
-                                <input type="text" class="form-control" id="longitude" name="longitude"
-                                    value="{{ old('longitude') }}">
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="price">Price*</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    id="price" name="price" value="{{ old('price') }}">
-                                @error('price')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group  mb-3">
-                                <label for="image">Image*</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    id="image" name="image" value="{{ old('image') }}" max="5242880">
-                                @error('image')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <div class="mt-3">
-                                    <img class="d-none w-25" id="image-preview" src="" alt="">
+                                    <div class="form-group col-lg-6 mb-3">
+                                        <label for="bed_number">Number of Beds*</label>
+                                        <input type="number" min="0"
+                                            class="form-control @error('bed_number') is-invalid @enderror" id="bed_number"
+                                            name="bed_number" value="{{ old('bed_number') }}">
+                                        @error('bed_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group  mb-3">
-                                <label for="visibility">Visibility*</label>
-                                <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
-                                    name="visibility">
-                                    <option value="1" @selected(old('visibility'))>
-                                        Visible
-                                    </option>
-                                    <option value="0" @selected(old('visibility'))>
-                                        Hidden
-                                    </option>
-                                </select>
-                                @error('visibility')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6 mb-3">
+                                        <label for="bathroom_number">Number of Bathrooms*</label>
+                                        <input type="number" min="0"
+                                            class="form-control @error('bathroom_number') is-invalid @enderror"
+                                            id="bathroom_number" name="bathroom_number"
+                                            value="{{ old('bathroom_number') }}">
+                                        @error('bathroom_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
 
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </form>
+                                    <div class="form-group col-lg-6 mb-3">
+                                        <label for="room_number">Number of Rooms*</label>
+                                        <input type="number" min="0"
+                                            class="form-control @error('room_number') is-invalid @enderror" id="room_number"
+                                            name="room_number" value="{{ old('room_number') }}">
+                                        @error('room_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Services*</label>
+
+                                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xxl-4 my-3 px-3">
+                                        @foreach ($services as $item)
+                                            <div class="form-check">
+                                                <input class="form-check-input @error('services') is-invalid @enderror"
+                                                    type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                    id="services-{{ $item->id }}" @checked(in_array($item->id, old('services', [])))>
+                                                <label class="form-check-label text-truncate"
+                                                    for="services-{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    @error('services')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group position-relative mb-3">
+                                    <label for="address">Address*</label>
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                        id="address" name="address" value="{{ old('address') }}" autocomplete="off"
+                                        placeholder="Street, House Number, Postal Code, City">
+                                    {{-- creazione lista suggerimento indirizzo --}}
+                                    <div id="hidden_list" class="card position-absolute w-100 radius d-none">
+                                        <ul class="list-group">
+
+                                        </ul>
+                                    </div>
+                                    @error('address')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group  mb-3">
+                                    <label for="city">City*</label>
+                                    <input type="text" class="form-control @error('city') is-invalid @enderror"
+                                        id="city" name="city" value="{{ old('city') }}" autocomplete="off">
+                                    @error('city')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group  mb-3">
+                                    <label for="state">State*</label>
+                                    <input type="text" class="form-control @error('state') is-invalid @enderror"
+                                        id="state" name="state" value="{{ old('state') }}" autocomplete="off">
+                                    @error('state')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group d-none mb-3">
+                                    <label for="latitude">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
+                                        value="{{ old('latitude') }}">
+                                </div>
+
+                                <div class="form-group d-none mb-3">
+                                    <label for="longitude">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
+                                        value="{{ old('longitude') }}">
+                                </div>
+
+                                <div class="form-group  mb-3">
+                                    <label for="price">Price*</label>
+                                    <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                        id="price" name="price" value="{{ old('price') }}" autocomplete="off">
+                                    @error('price')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group  mb-3">
+                                    <label for="image">Image*</label>
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                        id="image" name="image" value="{{ old('image') }}" max="5242880">
+                                    @error('image')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <div class="mt-3">
+                                        <img class="d-none w-25" id="image-preview" src="" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group  mb-3">
+                                    <label for="visibility">Visibility*</label>
+                                    <select class="form-control @error('visibility') is-invalid @enderror"
+                                        id="visibility" name="visibility">
+                                        <option value="1" @selected(old('visibility'))>
+                                            Visible
+                                        </option>
+                                        <option value="0" @selected(old('visibility'))>
+                                            Hidden
+                                        </option>
+                                    </select>
+                                    @error('visibility')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn_color">Create</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -326,4 +340,36 @@
             }
         });
     </script>
+    <style lang="scss" scoped>
+        :root {
+            --primary-color: #24ADE3
+        }
+
+        .p_color {
+            color: var(--primary-color)
+        }
+
+        .btn_color {
+            background-color: var(--primary-color);
+            color: white
+        }
+
+        .btn:hover {
+            background-color: rgb(27, 133, 174);
+            color: black
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-control:focus {
+            color: var(--primary-color);
+            background-color: var(--bs-body-bg);
+            border-color: var(--primary-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(27, 133, 174, 0.25);
+        }
+    </style>
 @endsection

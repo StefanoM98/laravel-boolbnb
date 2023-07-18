@@ -1,63 +1,71 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Apartments
+@endsection
 @section('content')
-    @include('partials.session_message')
-    <h1 class="text-center mt-2 text-danger"> My Apartments list</h1>
-    <div class="text-center m-4">
-        <a class="btn btn-success text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+    <div class="container mt-3">
+        @include('partials.session_message')
+        <h1 class="my-3  p_color"> My Apartments list</h1>
+
+        <div class="my-4">
+            <a class="btn btn_n my-4  text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>
+        </div>
+        @if ($apartments->count() > 0)
+            <table class="table align-middle">
+                <thead class="text-danger">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col" class="d-none d-lg-table-cell">City</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Address</th>
+                        <th scope="col">Price</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($apartments as $apartment)
+                        <tr class="text-capitalize">
+                            <td>{{ $apartment->name }}</td>
+                            <td class="d-none d-lg-table-cell">{{ $apartment->city }}</td>
+                            <td class="d-none d-lg-table-cell">{{ $apartment->address }}</td>
+                            <td>{{ $apartment->price }}€</td>
+                            <td class="">
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
+                                        class="btn btn-success">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-warning"
+                                        href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+
+                                    <form class="d-inline-block m-0"
+                                        action="{{ route('admin.apartments.destroy', $apartment->slug) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-danger ms_btn_cancel"
+                                            data-title="{{ $apartment->name }}">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <span>
+                <p class="text-center fs-2 fw-bold">
+                    You have not entered any ads yet
+                </p>
+            </span>
+        @endif
+
     </div>
 
-    @if ($apartments->count() > 0)
-        <table class="table align-middle">
-            <thead class="text-danger">
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($apartments as $apartment)
-                    <tr class="text-capitalize">
-                        <td>{{ $apartment->name }}</td>
-                        <td>{{ $apartment->city }}</td>
-                        <td>{{ $apartment->address }}</td>
-                        <td>{{ $apartment->price }}€</td>
-                        <td class="d-flex justify-center align-items-center">
-                            <div>
-                                <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-success">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a class="btn btn-warning" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </a>
-
-                                <form class="d-inline-block"
-                                    action="{{ route('admin.apartments.destroy', $apartment->slug) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" class="btn btn-danger ms_btn_cancel"
-                                        data-title="{{ $apartment->name }}">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <span>
-            <p class="text-center fs-2 fw-bold">
-                You have not entered any ads yet
-            </p>
-        </span>
-    @endif
     {{-- <div>
         {{ $projects->links() }}
     </div> --}}
@@ -68,4 +76,25 @@
             return confirm('Are you sure you want to delete this Project?');
         }
     </script> --}}
+
+    <style lang="scss" scoped>
+        .btn_n {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: black;
+            border-color: var(--primary-color)
+        }
+
+        :root {
+            --primary-color: #24ADE3
+        }
+
+        .p_color {
+            color: var(--primary-color)
+        }
+    </style>
 @endsection
