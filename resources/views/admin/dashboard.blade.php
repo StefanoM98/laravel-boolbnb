@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Welcome
+@endsection
 @section('content')
     @if (Auth::user()->name)
         <h1 class="p-3">Welcome <span class="p_color">{{ Auth::user()->name }}</span></h1>

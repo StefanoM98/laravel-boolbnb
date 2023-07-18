@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Message {{$apartment['name']}}
+@endsection
 @section('content')
     <div class="container pt-4 text-center">
         <h4 class="my-4 p_color">Message by {{ $message->email }} </h4>

@@ -1,9 +1,11 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Apartments
+@endsection
 @section('content')
-    <div class="container">
+    <div class="container mt-3">
         @include('partials.session_message')
-        <h1 class=" my-3  p_color"> My Apartments list</h1>
+        <h1 class="my-3  p_color"> My Apartments list</h1>
 
         <div class="my-4">
             <a class="btn btn_n my-4  text-center" href="{{ route('admin.apartments.create') }}">NEW APARTMENT</a>

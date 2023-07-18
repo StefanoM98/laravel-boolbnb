@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Edit {{$apartment->name}}
+@endsection
 @section('content')
 <div class="container">
         @include('partials.session_message')

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('page-name')
+Create ADS
+@endsection
 @section('content')
     <div class="background">
         <div class="container">

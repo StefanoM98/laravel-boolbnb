@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('page-name')
+Admin
+@endsection
 @section('content')
     <div class="jumbotron mb-4 rounded-3">
         <div class="container my-5">

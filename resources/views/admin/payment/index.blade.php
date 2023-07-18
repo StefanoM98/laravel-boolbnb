@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('page-name', 'Pagamento')
+@section('page-name')
+Payment
+@endsection
 
 @section('head')
     {{-- BRAINTREE --}}

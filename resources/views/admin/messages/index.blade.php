@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('page-name')
+Messages
+@endsection
 @section('content')
     <div class="container pt-3">
         <h1 class="p_color">Messages</h1>

@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('page-name', 'Sponsorizza appartamento')
+@section('page-name')
+Sponsor
+@endsection
 
 @section('content')
 
@@ -49,10 +51,10 @@
                                         <th scope="col" class="d-none text-center d-md-table-cell p-3">
                                             <i class="bi bi-camera-fill"></i> Apartment image
                                         </th>
-                                        <th scope="col" class="p-3">
+                                        <th scope="col" class="p-3 text-truncate">
                                             <i class="bi bi-bookmark-fill"></i> Name
                                         </th>
-                                        <th scope="col" class="d-none d-lg-table-cell p-3">
+                                        <th scope="col" class="d-none text-truncate d-lg-table-cell p-3">
                                             <i class="bi bi-map-fill"></i> Address
                                         </th>
                                         <th scope="col" class="text-center text-warning p-3">
@@ -118,7 +120,7 @@
                                     Get sponsored for a duration of {{ $sponsor->duration }} h
                                 </p>
                                 <div>
-                                    <a href="{{ route('admin.sponsors.index') }}" class="btn btn-primary m-3">
+                                    <a href="{{ route('admin.sponsors.index') }}" class="btn btn_color m-3">
                                         Go back to sponsor's page
                                     </a>
                                 </div>
@@ -129,7 +131,7 @@
 
                     <div class="col-sm-12 col-md-6 d-flex justify-content-center sponsor-show-card">
                         <div class="my-apartment-card">
-                            <h2 class="text-center px-2">{{ $apartment->name }}</h2>
+                            <h2 class="text-center text-white px-2">{{ $apartment->name }}</h2>
                             <div class="px-5">
                                 <img class="img-fluid rounded" src="{{ $apartment->getImageUri() }}">
                             </div>
@@ -169,7 +171,8 @@
     
         .btn:hover {
             background-color: #1b85ae;
-            color: black
+            color: black;
+            border-color: var(--primary-color)
         }
     
         .bronze {
